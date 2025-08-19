@@ -1,0 +1,29 @@
+public class Task {
+    protected String description;
+    protected boolean isDone;
+
+    public Task(String description) {
+        this.description = description;
+        this.isDone = false;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Boolean getStatusIcon() {
+        return isDone;
+    }
+
+    public void markAsDone() {
+        isDone = true;
+    }
+
+    public void unmark() {
+        isDone = false;
+    }
+
+    public String showTask() {
+        return isDone ? "[X] " + description : "[ ] " + description;
+    }
+}
