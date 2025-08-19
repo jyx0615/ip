@@ -1,4 +1,9 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Jackson {
+    static List<String> lists = new ArrayList<>();
+
     public static void main(String[] args) {
         String chatbotName = "Jackson";
         // Greeting
@@ -7,7 +12,6 @@ public class Jackson {
         System.out.println("What can I do for you?");
         System.out.println("\n--------------------------------------------\n");
 
-
         while(true) {
             // Read user input
             String userInput = System.console().readLine();
@@ -15,11 +19,31 @@ public class Jackson {
                 case "bye":
                     exit();
                     return;
+                case "list":
+                    list();
+                    break;
                 default:
-                    echo(userInput);
+                    add(userInput);
                     break;
             }
         }
+    }
+
+    public static void list() {
+        // List all items
+        System.out.println("--------------------------------------------");
+        for (int i = 0; i < lists.size(); i++) {
+            System.out.println((i + 1) + ". " + lists.get(i));
+        }
+        System.out.println("\n--------------------------------------------\n");
+    }
+
+    public static void add(String item) {
+        // Add item to the list
+        System.out.println("--------------------------------------------");
+        System.out.println("added: " + item);
+        lists.add(item);
+        System.out.println("\n--------------------------------------------\n");
     }
 
     public static void echo(String message) {
