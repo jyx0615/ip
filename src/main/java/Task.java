@@ -1,6 +1,6 @@
 public class Task {
-    protected String description;
-    protected boolean isDone;
+    private String description;
+    private boolean isDone;
 
     public Task(String description) {
         this.description = description;
@@ -11,7 +11,7 @@ public class Task {
         return description;
     }
 
-    public Boolean getStatusIcon() {
+    public Boolean getStatus() {
         return isDone;
     }
 

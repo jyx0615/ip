@@ -1,7 +1,5 @@
-import java.util.ArrayList;
-import java.util.List;
 public class Jackson {
-    static List<Task> tasks = new ArrayList<>();
+    private static TaskManager taskManager = new TaskManager();
 
     public static void main(String[] args) {
         String chatbotName = "Jackson";
@@ -20,86 +18,43 @@ public class Jackson {
 
             System.out.println("--------------------------------------------");
             switch (command) {
-                case "bye":
-                    exit();
-                    return;
-
-                case "list":
-                    list();
-                    break;
-
-                case "mark":
-                    if (!argument.isEmpty()) {
-                        try {
-                            int index = Integer.parseInt(argument);
-                            mark(index);
-                        } catch (NumberFormatException e) {
-                            System.out.println("Please provide a valid number for mark.");
-                        }
-                    } else {
-                        System.out.println("Usage: mark <number>");
+            case "bye":
+                exit();
+                return;
+            case "list":
+                taskManager.listTasks();
+                break;
+            case "mark":
+                if (!argument.isEmpty()) {
+                    try {
+                        int index = Integer.parseInt(argument);
+                        taskManager.markTask(index);
+                    } catch (NumberFormatException e) {
+                        System.out.println("Please provide a valid number for mark.");
                     }
-                    break;
-
-                case "unmark":
-                    if (!argument.isEmpty()) {
-                        try {
-                            int index = Integer.parseInt(argument);
-                            unmark(index);
-                        } catch (NumberFormatException e) {
-                            System.out.println("Please provide a valid number for unmark.");
-                        }
-                    } else {
-                        System.out.println("Usage: unmark <number>");
+                } else {
+                    System.out.println("Usage: mark <number>");
+                }
+                break;
+            case "unmark":
+                if (!argument.isEmpty()) {
+                    try {
+                        int index = Integer.parseInt(argument);
+                        taskManager.unmarkTask(index);
+                    } catch (NumberFormatException e) {
+                        System.out.println("Please provide a valid number for unmark.");
                     }
-                    break;
-
-                default:
-                    add(userInput);
-                    break;
+                } else {
+                    System.out.println("Usage: unmark <number>");
+                }
+                break;
+            default:
+                taskManager.addTask(userInput);
+                break;
             }
 
             System.out.println("\n--------------------------------------------\n");
         }
-    }
-
-    public static void mark(int index) {
-        // Mark item as done
-        if (index > 0 && index <= tasks.size()) {
-            Task t = tasks.get(index - 1);
-            System.out.println("Nice! I've marked this task as done:");
-            System.out.println("[X] " + t.getDescription());
-            t.markAsDone(); // Update task status
-        } else {
-            System.out.println("Invalid index for mark.");
-        }
-    }
-
-    public static void unmark(int index) {
-        // Mark item as done
-        if (index > 0 && index <= tasks.size()) {
-            Task t = tasks.get(index - 1);
-            System.out.println("OK, I've marked this task as not done yet:");
-            System.out.println("[ ] " + t.getDescription());
-            t.unmark(); // Update task status
-        } else {
-            System.out.println("Invalid index for mark.");
-        }
-    }
-
-    public static void list() {
-        // List all items
-        for (int i = 0; i < tasks.size(); i++) {
-            Task t = tasks.get(i);
-            System.out.println((i + 1) + ". " + t.showTask());
-        }
-    }
-
-    public static void add(String item) {
-        // Add item to the list
-        System.out.println("added: " + item);
-        Task task = new Task(item);
-        tasks.add(task);
     }
 
     public static void echo(String message) {
