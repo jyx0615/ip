@@ -1,12 +1,58 @@
 import java.util.Scanner;
 
 public class Jackson {
+    private static String chatbotName = "Jackson";
     private static TaskManager taskManager = new TaskManager();
 
     public static void main(String[] args) {
         final Scanner SCANNER = new Scanner(System.in);
-        String chatbotName = "Jackson";
-        // Greeting
+        printWelcomeMessage();
+
+        while (true) {
+            // Read user input
+            String userInput = SCANNER.nextLine();
+            showBreakingLine();
+            String[] userCommands = Parser.parseCommand(userInput);
+            executeCommand(userCommands);
+            showBreakingLine();
+        }
+    }
+
+    private static void showBreakingLine() {
+        System.out.println("\n--------------------------------------------");
+    }
+
+    private static void executeCommand(String[] userCommands) {
+        switch (userCommands[0]) {
+        case "bye":
+            exit();
+            System.exit(0);
+            break;
+        case "list":
+            taskManager.listTasks();
+            break;
+        case "todo":
+            taskManager.addTodoTask(userCommands[1]);
+            break;
+        case "deadline":
+            taskManager.addDeadlineTask(userCommands[1], userCommands[2]);
+            break;
+        case "event":
+            taskManager.addEventTask(userCommands[1], userCommands[2], userCommands[3]);
+            break;
+        case "mark":
+            taskManager.markTask(Integer.parseInt(userCommands[1]));
+            break;
+        case "unmark": 
+            taskManager.unmarkTask(Integer.parseInt(userCommands[1]));
+            break;
+        default:
+            echo("I'm sorry, but I don't know what that means :-(");
+            break;
+        }
+    }
+
+    private static void printWelcomeMessage() {
         System.out.println("--------------------------------------------");
         System.out.printf("Hello! I'm %s.\n", chatbotName);
         System.out.println("     ____.              __                         \n" + //
@@ -16,64 +62,7 @@ public class Jackson {
                         "\\________(____  /\\___  >__|_ \\/____  >____/|___|  /\n" + //
                         "              \\/     \\/     \\/     \\/           \\/ ");
         System.out.println("What can I do for you?");
-        System.out.println("\n--------------------------------------------\n");
-
-        while (true) {
-            // Read user input
-            String userInput = SCANNER.nextLine();
-            String[] parts = userInput.trim().split("\\s+", 2);
-            String command = parts[0];
-            String argument = parts.length > 1 ? parts[1] : "";
-            String[] arguments = argument.split("/");
-
-            System.out.println("--------------------------------------------");
-            switch (command) {
-            case "bye":
-                exit();
-                return;
-            case "list":
-                taskManager.listTasks();
-                break;
-            case "todo":
-                taskManager.addTodoTask(argument);
-                break;
-            case "deadline":
-                taskManager.addDeadlineTask(arguments);
-                break;
-            case "event":
-                taskManager.addEventTask(arguments);
-                break;
-            case "mark":
-                if (!argument.isEmpty()) {
-                    try {
-                        int index = Integer.parseInt(argument);
-                        taskManager.markTask(index);
-                    } catch (NumberFormatException e) {
-                        System.out.println("Please provide a valid number for mark.");
-                    }
-                } else {
-                    System.out.println("Usage: mark <number>");
-                }
-                break;
-            case "unmark":
-                if (!argument.isEmpty()) {
-                    try {
-                        int index = Integer.parseInt(argument);
-                        taskManager.unmarkTask(index);
-                    } catch (NumberFormatException e) {
-                        System.out.println("Please provide a valid number for unmark.");
-                    }
-                } else {
-                    System.out.println("Usage: unmark <number>");
-                }
-                break;
-            default:
-                echo("I'm sorry, but I don't know what that means :-(");
-                break;
-            }
-
-            System.out.println("\n--------------------------------------------\n");
-        }
+        showBreakingLine();
     }
 
     public static void echo(String message) {

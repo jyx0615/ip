@@ -25,7 +25,7 @@ Here are the tasks in your list:
 
 --------------------------------------------
 Got it. I've added this task:
-[D][ ] return book  (by: Sunday)
+[D][ ] return book (by: Sunday)
 Now you have 2 tasks in the list.
 
 --------------------------------------------
@@ -33,13 +33,13 @@ Now you have 2 tasks in the list.
 --------------------------------------------
 Here are the tasks in your list:
 1. [T][ ] borrow book
-2. [D][ ] return book  (by: Sunday)
+2. [D][ ] return book (by: Sunday)
 
 --------------------------------------------
 
 --------------------------------------------
 Got it. I've added this task:
-[E][ ] project meeting  (from: 4pm to: Mon 2pm)
+[E][ ] project meeting (from: 4pm to: Mon 2pm)
 Now you have 3 tasks in the list.
 
 --------------------------------------------
@@ -47,14 +47,14 @@ Now you have 3 tasks in the list.
 --------------------------------------------
 Here are the tasks in your list:
 1. [T][ ] borrow book
-2. [D][ ] return book  (by: Sunday)
-3. [E][ ] project meeting  (from: 4pm to: Mon 2pm)
+2. [D][ ] return book (by: Sunday)
+3. [E][ ] project meeting (from: 4pm to: Mon 2pm)
 
 --------------------------------------------
 
 --------------------------------------------
 Got it. I've added this task:
-[D][ ] do homework  (by: no idea :-p)
+[D][ ] do homework (by: no idea :-p)
 Now you have 4 tasks in the list.
 
 --------------------------------------------
@@ -62,9 +62,9 @@ Now you have 4 tasks in the list.
 --------------------------------------------
 Here are the tasks in your list:
 1. [T][ ] borrow book
-2. [D][ ] return book  (by: Sunday)
-3. [E][ ] project meeting  (from: 4pm to: Mon 2pm)
-4. [D][ ] do homework  (by: no idea :-p)
+2. [D][ ] return book (by: Sunday)
+3. [E][ ] project meeting (from: 4pm to: Mon 2pm)
+4. [D][ ] do homework (by: no idea :-p)
 
 --------------------------------------------
 
@@ -81,9 +81,9 @@ Marked task 2 as done.
 --------------------------------------------
 Here are the tasks in your list:
 1. [T][X] borrow book
-2. [D][X] return book  (by: Sunday)
-3. [E][ ] project meeting  (from: 4pm to: Mon 2pm)
-4. [D][ ] do homework  (by: no idea :-p)
+2. [D][X] return book (by: Sunday)
+3. [E][ ] project meeting (from: 4pm to: Mon 2pm)
+4. [D][ ] do homework (by: no idea :-p)
 
 --------------------------------------------
 
@@ -100,9 +100,9 @@ Unmarked task 4.
 --------------------------------------------
 Here are the tasks in your list:
 1. [T][X] borrow book
-2. [D][ ] return book  (by: Sunday)
-3. [E][ ] project meeting  (from: 4pm to: Mon 2pm)
-4. [D][ ] do homework  (by: no idea :-p)
+2. [D][ ] return book (by: Sunday)
+3. [E][ ] project meeting (from: 4pm to: Mon 2pm)
+4. [D][ ] do homework (by: no idea :-p)
 
 --------------------------------------------
 
