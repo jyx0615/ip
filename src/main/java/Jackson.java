@@ -1,17 +1,26 @@
+import java.util.Scanner;
+
 public class Jackson {
     private static TaskManager taskManager = new TaskManager();
 
     public static void main(String[] args) {
+        final Scanner SCANNER = new Scanner(System.in);
         String chatbotName = "Jackson";
         // Greeting
         System.out.println("--------------------------------------------");
         System.out.printf("Hello! I'm %s.\n", chatbotName);
+        System.out.println("     ____.              __                         \n" + //
+                        "    |    |____    ____ |  | __  __________   ____  \n" + //
+                        "    |    \\__  \\ _/ ___\\|  |/ / /  ___/  _ \\ /    \\ \n" + //
+                        "/\\__|    |/ __ \\\\  \\___|    <  \\___ (  <_> )   |  \\\n" + //
+                        "\\________(____  /\\___  >__|_ \\/____  >____/|___|  /\n" + //
+                        "              \\/     \\/     \\/     \\/           \\/ ");
         System.out.println("What can I do for you?");
         System.out.println("\n--------------------------------------------\n");
 
         while (true) {
             // Read user input
-            String userInput = System.console().readLine();
+            String userInput = SCANNER.nextLine();
             String[] parts = userInput.trim().split("\\s+", 2);
             String command = parts[0];
             String argument = parts.length > 1 ? parts[1] : "";
