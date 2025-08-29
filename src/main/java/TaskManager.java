@@ -6,7 +6,7 @@ public class TaskManager {
     public void listTasks() {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < taskCount; i++) {
-            System.out.println((i + 1) + ". " + tasks[i].showTaskText());
+            System.out.println((i + 1) + ". " + tasks[i].toString());
         }
     }
 
@@ -15,9 +15,9 @@ public class TaskManager {
             System.out.println("The description of a todo cannot be empty.");
             return;
         }
-        tasks[taskCount ++] = new Task(description, Task.TaskType.TODO);
+        tasks[taskCount ++] = new Todo(description);
         System.out.println("Got it. I've added this task:");
-        System.out.println(tasks[taskCount - 1].showTaskText());
+        System.out.println(tasks[taskCount - 1].toString());
         System.out.println("Now you have " + taskCount + " tasks in the list.");
     }
 
@@ -28,11 +28,11 @@ public class TaskManager {
         }
         String start = arguments.length > 1 ? arguments[1] : "";
         String deadline  = arguments.length > 2 ? arguments[2] : "";
-        start = start.replace("from ", "");
-        deadline = deadline.replace("to ", "");
-        tasks[taskCount ++] = new Task(arguments[0], Task.TaskType.EVENT, deadline, start);
+        start = start.replaceFirst("^from\\s+", "").replaceAll("\\s+$", "");
+        deadline = deadline.replaceFirst("^to\\s+", "").replaceAll("\\s+$", "");
+        tasks[taskCount ++] = new Event(arguments[0], deadline, start);
         System.out.println("Got it. I've added this task:");
-        System.out.println(tasks[taskCount - 1].showTaskText());
+        System.out.println(tasks[taskCount - 1].toString());
         System.out.println("Now you have " + taskCount + " tasks in the list.");
     }
 
@@ -43,9 +43,9 @@ public class TaskManager {
         }
         String deadline = arguments.length > 1 ? arguments[1] : "";
         deadline = deadline.replace("by ", "");
-        tasks[taskCount ++] = new Task(arguments[0], Task.TaskType.DEADLINE, deadline);
+        tasks[taskCount ++] = new Deadline(arguments[0], deadline);
         System.out.println("Got it. I've added this task:");
-        System.out.println(tasks[taskCount - 1].showTaskText());
+        System.out.println(tasks[taskCount - 1].toString());
         System.out.println("Now you have " + taskCount + " tasks in the list.");
     }
 
