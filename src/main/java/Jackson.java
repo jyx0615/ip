@@ -15,6 +15,7 @@ public class Jackson {
             String[] parts = userInput.trim().split("\\s+", 2);
             String command = parts[0];
             String argument = parts.length > 1 ? parts[1] : "";
+            String[] arguments = argument.split("/");
 
             System.out.println("--------------------------------------------");
             switch (command) {
@@ -23,6 +24,15 @@ public class Jackson {
                 return;
             case "list":
                 taskManager.listTasks();
+                break;
+            case "todo":
+                taskManager.addTodoTask(argument);
+                break;
+            case "deadline":
+                taskManager.addDeadlineTask(arguments);
+                break;
+            case "event":
+                taskManager.addEventTask(arguments);
                 break;
             case "mark":
                 if (!argument.isEmpty()) {
@@ -49,7 +59,7 @@ public class Jackson {
                 }
                 break;
             default:
-                taskManager.addTask(userInput);
+                echo("I'm sorry, but I don't know what that means :-(");
                 break;
             }
 
