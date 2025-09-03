@@ -6,20 +6,20 @@ public class Parser {
         String argument = parts.length > 1 ? parts[1] : "";
 
         switch (command) {
-            case "todo":
-                return parseTodo(argument);
-            case "deadline":
-                return parseDeadline(argument);
-            case "event":
-                return parseEvent(argument);
-            case "mark":
-            case "unmark":
-                return new String[] {command, argument};
-            case "list":
-            case "bye":
-                return new String[] {command};
-            default:
-                return new String[] {"invalid"};
+        case "todo":
+            return parseTodo(argument);
+        case "deadline":
+            return parseDeadline(argument);
+        case "event":
+            return parseEvent(argument);
+        case "mark":
+        case "unmark":
+            return new String[] {command, argument};
+        case "list":
+        case "bye":
+            return new String[] {command};
+        default:
+            return new String[] {"invalid"};
         }
     }
 

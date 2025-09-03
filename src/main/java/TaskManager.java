@@ -12,23 +12,17 @@ public class TaskManager {
 
     public void addTodoTask(String description) {
         tasks[taskCount ++] = new Todo(description);
-        System.out.println("Got it. I've added this task:");
-        System.out.println(tasks[taskCount - 1].toString());
-        System.out.println("Now you have " + taskCount + " tasks in the list.");
+        printAddTaskMessage();
     }
 
     public void addEventTask(String description, String start, String deadline) {
         tasks[taskCount ++] = new Event(description, deadline, start);
-        System.out.println("Got it. I've added this task:");
-        System.out.println(tasks[taskCount - 1].toString());
-        System.out.println("Now you have " + taskCount + " tasks in the list.");
+        printAddTaskMessage();
     }
 
     public void addDeadlineTask(String description, String deadline) {
         tasks[taskCount ++] = new Deadline(description, deadline);
-        System.out.println("Got it. I've added this task:");
-        System.out.println(tasks[taskCount - 1].toString());
-        System.out.println("Now you have " + taskCount + " tasks in the list.");
+        printAddTaskMessage();
     }
 
     public void markTask(int index) {
@@ -47,5 +41,11 @@ public class TaskManager {
         } else {
             System.out.println("Invalid task number.");
         }
+    }
+
+    public void printAddTaskMessage() {
+        System.out.println("Got it. I've added this task:");
+        System.out.println(tasks[taskCount - 1].toString());
+        System.out.println("Now you have " + taskCount + " tasks in the list.");
     }
 }

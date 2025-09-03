@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Jackson {
-    private static String chatbotName = "Jackson";
+    private static final String CHAT_BOT_NAME = "Jackson";
     private static TaskManager taskManager = new TaskManager();
 
     public static void main(String[] args) {
@@ -54,7 +54,7 @@ public class Jackson {
 
     private static void printWelcomeMessage() {
         System.out.println("--------------------------------------------");
-        System.out.printf("Hello! I'm %s.\n", chatbotName);
+        System.out.printf("Hello! I'm %s.\n", CHAT_BOT_NAME);
         System.out.println("     ____.              __                         \n" + //
                         "    |    |____    ____ |  | __  __________   ____  \n" + //
                         "    |    \\__  \\ _/ ___\\|  |/ / /  ___/  _ \\ /    \\ \n" + //
