@@ -1,3 +1,4 @@
+package jackson;
 public class JacksonException extends Exception {
     public enum ErrorType {
         UNKNOWN_COMMAND,

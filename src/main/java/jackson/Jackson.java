@@ -1,4 +1,8 @@
+package jackson;
 import java.util.Scanner;
+
+import jackson.command.Parser;
+import jackson.task.TaskManager;
 
 public class Jackson {
     private static final String CHAT_BOT_NAME = "Jackson";
