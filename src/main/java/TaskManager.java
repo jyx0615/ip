@@ -10,17 +10,26 @@ public class TaskManager {
         }
     }
 
-    public void addTodoTask(String description) {
+    public void addTodoTask(String description) throws JacksonException {
+        if (taskCount >= MAX_TASKS) {
+            throw new JacksonException(JacksonException.ErrorType.TOO_MANY_TASKS);
+        }
         tasks[taskCount ++] = new Todo(description);
         printAddTaskMessage();
     }
 
-    public void addEventTask(String description, String start, String deadline) {
+    public void addEventTask(String description, String start, String deadline) throws JacksonException{
+        if (taskCount >= MAX_TASKS) {
+            throw new JacksonException(JacksonException.ErrorType.TOO_MANY_TASKS);
+        }
         tasks[taskCount ++] = new Event(description, deadline, start);
         printAddTaskMessage();
     }
 
-    public void addDeadlineTask(String description, String deadline) {
+    public void addDeadlineTask(String description, String deadline) throws JacksonException {
+        if (taskCount >= MAX_TASKS) {
+            throw new JacksonException(JacksonException.ErrorType.TOO_MANY_TASKS);
+        }
         tasks[taskCount ++] = new Deadline(description, deadline);
         printAddTaskMessage();
     }

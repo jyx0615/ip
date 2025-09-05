@@ -1,3 +1,11 @@
+unknow command
+todo
+deadline
+event
+deadline bad format
+event bad format
+event /from bad format
+event /from /t0 bad format
 todo borrow book
 list
 deadline return book /by Sunday

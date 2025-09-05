@@ -11,6 +11,54 @@ What can I do for you?
 --------------------------------------------
 
 --------------------------------------------
+I'm sorry, but I don't know what that means.
+
+--------------------------------------------
+
+--------------------------------------------
+The description of a task cannot be empty.
+
+--------------------------------------------
+
+--------------------------------------------
+The description of a task cannot be empty.
+
+--------------------------------------------
+
+--------------------------------------------
+The description of a task cannot be empty.
+
+--------------------------------------------
+
+--------------------------------------------
+The format of the task is invalid. 
+The format is as follows: 
+deadline <desc> /by <time>
+
+--------------------------------------------
+
+--------------------------------------------
+The format of the task is invalid. 
+The format is as follows: 
+event <desc> /from <start> /to <end>
+
+--------------------------------------------
+
+--------------------------------------------
+The format of the task is invalid. 
+The format is as follows: 
+event <desc> /from <start> /to <end>
+
+--------------------------------------------
+
+--------------------------------------------
+The format of the task is invalid. 
+The format is as follows: 
+event <desc> /from <start> /to <end>
+
+--------------------------------------------
+
+--------------------------------------------
 Got it. I've added this task:
 [T][ ] borrow book
 Now you have 1 tasks in the list.
