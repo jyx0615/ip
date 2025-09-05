@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Jackson {
     private static final String CHAT_BOT_NAME = "Jackson";
     private static TaskManager taskManager = new TaskManager();
-
+    
     public static void main(String[] args) {
         final Scanner SCANNER = new Scanner(System.in);
         printWelcomeMessage();
@@ -12,8 +12,13 @@ public class Jackson {
             // Read user input
             String userInput = SCANNER.nextLine();
             showBreakingLine();
-            String[] userCommands = Parser.parseCommand(userInput);
-            executeCommand(userCommands);
+            try {
+                String[] userCommands = Parser.parseCommand(userInput);
+                executeCommand(userCommands);
+            } catch (JacksonException e) {
+                System.out.println(e.getMessage());
+            }
+            
             showBreakingLine();
         }
     }
@@ -22,7 +27,7 @@ public class Jackson {
         System.out.println("\n--------------------------------------------");
     }
 
-    private static void executeCommand(String[] userCommands) {
+    private static void executeCommand(String[] userCommands) throws JacksonException {
         switch (userCommands[0]) {
         case "bye":
             exit();
@@ -47,8 +52,7 @@ public class Jackson {
             taskManager.unmarkTask(Integer.parseInt(userCommands[1]));
             break;
         default:
-            echo("I'm sorry, but I don't know what that means :-(");
-            break;
+            throw new JacksonException(JacksonException.ErrorType.UNKNOWN_COMMAND);
         }
     }
 
@@ -63,11 +67,6 @@ public class Jackson {
                         "              \\/     \\/     \\/     \\/           \\/ ");
         System.out.println("What can I do for you?");
         showBreakingLine();
-    }
-
-    public static void echo(String message) {
-        // Echo the message
-        System.out.println(message);
     }
 
     public static void exit() {
