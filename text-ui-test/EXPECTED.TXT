@@ -16,45 +16,45 @@ I'm sorry, but I don't know what that means.
 --------------------------------------------
 
 --------------------------------------------
-The description of a task cannot be empty.
+The description of a task cannot be empty.todo <description>
 
 --------------------------------------------
 
 --------------------------------------------
-The description of a task cannot be empty.
+The description of a task cannot be empty.deadline <description> /by <time>
 
 --------------------------------------------
 
 --------------------------------------------
-The description of a task cannot be empty.
-
---------------------------------------------
-
---------------------------------------------
-The format of the task is invalid. 
-The format is as follows: 
-deadline <desc> /by <time>
+The description of a task cannot be empty.event <description> /from <start time> /to <end time>
 
 --------------------------------------------
 
 --------------------------------------------
 The format of the task is invalid. 
 The format is as follows: 
-event <desc> /from <start> /to <end>
+deadline <description> /by <time>
 
 --------------------------------------------
 
 --------------------------------------------
 The format of the task is invalid. 
 The format is as follows: 
-event <desc> /from <start> /to <end>
+event <description> /from <start time> /to <end time>
 
 --------------------------------------------
 
 --------------------------------------------
 The format of the task is invalid. 
 The format is as follows: 
-event <desc> /from <start> /to <end>
+event <description> /from <start time> /to <end time>
+
+--------------------------------------------
+
+--------------------------------------------
+The format of the task is invalid. 
+The format is as follows: 
+event <description> /from <start time> /to <end time>
 
 --------------------------------------------
 
@@ -127,6 +127,26 @@ Marked task 2 as done.
 --------------------------------------------
 
 --------------------------------------------
+Invalid task number.
+
+--------------------------------------------
+
+--------------------------------------------
+Invalid task number.
+
+--------------------------------------------
+
+--------------------------------------------
+The task index provided is empty.
+
+--------------------------------------------
+
+--------------------------------------------
+Invalid task number.
+
+--------------------------------------------
+
+--------------------------------------------
 Here are the tasks in your list:
 1. [T][X] borrow book
 2. [D][X] return book (by: Sunday)
@@ -136,21 +156,35 @@ Here are the tasks in your list:
 --------------------------------------------
 
 --------------------------------------------
-Unmarked task 2.
-
---------------------------------------------
-
---------------------------------------------
-Unmarked task 4.
+Noted. I've removed this task:
+[T][X] borrow book
+Now you have 3 tasks in the list.
 
 --------------------------------------------
 
 --------------------------------------------
 Here are the tasks in your list:
-1. [T][X] borrow book
-2. [D][ ] return book (by: Sunday)
-3. [E][ ] project meeting (from: Mon 2pm to: 4pm)
-4. [D][ ] do homework (by: no idea :-p)
+1. [D][X] return book (by: Sunday)
+2. [E][ ] project meeting (from: Mon 2pm to: 4pm)
+3. [D][ ] do homework (by: no idea :-p)
+
+--------------------------------------------
+
+--------------------------------------------
+Unmarked task 2.
+
+--------------------------------------------
+
+--------------------------------------------
+Invalid task number.
+
+--------------------------------------------
+
+--------------------------------------------
+Here are the tasks in your list:
+1. [D][X] return book (by: Sunday)
+2. [E][ ] project meeting (from: Mon 2pm to: 4pm)
+3. [D][ ] do homework (by: no idea :-p)
 
 --------------------------------------------
 

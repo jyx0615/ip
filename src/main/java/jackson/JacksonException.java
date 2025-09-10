@@ -4,14 +4,16 @@ public class JacksonException extends Exception {
         UNKNOWN_COMMAND,
         EMPTY_TASK_DESCRIPTION,
         INVIALID_TASK_FORMAT,
-        TOO_MANY_TASKS,
+        INVALID_TASK_INDEX,
+        EMPTY_TASK_INDEX,
     }
 
     private final static String UNKNOWN_COMMAND_MESSAGE = "I'm sorry, but I don't know what that means.";
     private final static String EMPTY_TASK_MESSAGE = "The description of a task cannot be empty.";
     private final static String INVALID_TASK_FORMAT_MESSAGE = "The format of the task is invalid. \nThe format is as follows: \n";
     private final static String UNKNOWN_ERROR_MESSAGE = "An unknown error occurred.";
-    private final static String TOO_MANY_TASKS = "You have too many tasks in your list.";
+    private final static String INVALID_TASK_INDEX_MESSAGE = "The task index provided is invalid.";
+    private final static String EMPTY_TASK_INDEX_MESSAGE = "The task index provided is empty.";
 
     private String message;
     private final ErrorType errorType;
@@ -35,11 +37,13 @@ public class JacksonException extends Exception {
         case UNKNOWN_COMMAND:
             return UNKNOWN_COMMAND_MESSAGE;
         case EMPTY_TASK_DESCRIPTION:
-            return EMPTY_TASK_MESSAGE;
+            return EMPTY_TASK_MESSAGE + message;
         case INVIALID_TASK_FORMAT:
             return INVALID_TASK_FORMAT_MESSAGE + message;
-        case TOO_MANY_TASKS:
-            return TOO_MANY_TASKS;
+        case INVALID_TASK_INDEX:
+            return INVALID_TASK_INDEX_MESSAGE;
+        case EMPTY_TASK_INDEX:
+            return EMPTY_TASK_INDEX_MESSAGE;
         default:
             return UNKNOWN_ERROR_MESSAGE;
         }
