@@ -55,6 +55,9 @@ public class Jackson {
         case "unmark": 
             taskManager.unmarkTask(Integer.parseInt(userCommands[1]));
             break;
+        case "delete":
+            taskManager.deleteTask(Integer.parseInt(userCommands[1]));
+            break;
         default:
             throw new JacksonException(JacksonException.ErrorType.UNKNOWN_COMMAND);
         }

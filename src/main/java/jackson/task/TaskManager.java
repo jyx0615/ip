@@ -1,46 +1,36 @@
 package jackson.task;
+import java.util.ArrayList;
 
 import jackson.JacksonException;
 
 public class TaskManager {
-    private static final int MAX_TASKS = 100;
-    private Task[] tasks = new Task[MAX_TASKS];
-    private int taskCount = 0;
+    private ArrayList<Task> tasks = new ArrayList<>();
 
     public void listTasks() {
         System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < taskCount; i++) {
-            System.out.println((i + 1) + ". " + tasks[i].toString());
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.println((i + 1) + ". " + tasks.get(i).toString());
         }
     }
 
     public void addTodoTask(String description) throws JacksonException {
-        if (taskCount >= MAX_TASKS) {
-            throw new JacksonException(JacksonException.ErrorType.TOO_MANY_TASKS);
-        }
-        tasks[taskCount ++] = new Todo(description);
+        tasks.add(new Todo(description));
         printAddTaskMessage();
     }
 
     public void addEventTask(String description, String start, String deadline) throws JacksonException{
-        if (taskCount >= MAX_TASKS) {
-            throw new JacksonException(JacksonException.ErrorType.TOO_MANY_TASKS);
-        }
-        tasks[taskCount ++] = new Event(description, start, deadline);
+        tasks.add(new Event(description, start, deadline));
         printAddTaskMessage();
     }
 
     public void addDeadlineTask(String description, String deadline) throws JacksonException {
-        if (taskCount >= MAX_TASKS) {
-            throw new JacksonException(JacksonException.ErrorType.TOO_MANY_TASKS);
-        }
-        tasks[taskCount ++] = new Deadline(description, deadline);
+        tasks.add(new Deadline(description, deadline));
         printAddTaskMessage();
     }
 
     public void markTask(int index) {
-        if (index > 0 && index <= taskCount) {
-            tasks[index - 1].markAsDone();
+        if (index > 0 && index <= tasks.size()) {
+            tasks.get(index - 1).markAsDone();
             System.out.println("Marked task " + index + " as done.");
         } else {
             System.out.println("Invalid task number.");
@@ -48,9 +38,20 @@ public class TaskManager {
     }
 
     public void unmarkTask(int index) {
-        if (index > 0 && index <= taskCount) {
-            tasks[index - 1].unmark();
+        if (index > 0 && index <= tasks.size()) {
+            tasks.get(index - 1).unmark();
             System.out.println("Unmarked task " + index + ".");
+        } else {
+            System.out.println("Invalid task number.");
+        }
+    }
+
+    public void deleteTask(int index) {
+        if (index > 0 && index <= tasks.size()) {
+            Task removedTask = tasks.remove(index - 1);
+            System.out.println("Noted. I've removed this task:");
+            System.out.println(removedTask.toString());
+            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
         } else {
             System.out.println("Invalid task number.");
         }
@@ -58,7 +59,7 @@ public class TaskManager {
 
     public void printAddTaskMessage() {
         System.out.println("Got it. I've added this task:");
-        System.out.println(tasks[taskCount - 1].toString());
-        System.out.println("Now you have " + taskCount + " tasks in the list.");
+        System.out.println(tasks.get(tasks.size() - 1).toString());
+        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
     }
 }
