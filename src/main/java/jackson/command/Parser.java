@@ -1,3 +1,7 @@
+package jackson.command;
+
+import jackson.JacksonException;
+
 public class Parser {
     
     public static String[] parseCommand(String userInput) throws JacksonException {

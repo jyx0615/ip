@@ -1,3 +1,7 @@
+package jackson.task;
+
+import jackson.JacksonException;
+
 public class TaskManager {
     private static final int MAX_TASKS = 100;
     private Task[] tasks = new Task[MAX_TASKS];
@@ -22,7 +26,7 @@ public class TaskManager {
         if (taskCount >= MAX_TASKS) {
             throw new JacksonException(JacksonException.ErrorType.TOO_MANY_TASKS);
         }
-        tasks[taskCount ++] = new Event(description, deadline, start);
+        tasks[taskCount ++] = new Event(description, start, deadline);
         printAddTaskMessage();
     }
 
