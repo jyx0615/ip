@@ -16,6 +16,12 @@ deadline do homework /by no idea :-p
 list
 mark 1
 mark 2
+mark -1
+unmark 0
+delete
+delete 8
+list
+delete 1
 list
 unmark 2
 unmark 4
