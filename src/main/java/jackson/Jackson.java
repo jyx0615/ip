@@ -1,14 +1,28 @@
 package jackson;
 import java.util.Scanner;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.io.File;
 
 import jackson.command.Parser;
 import jackson.task.TaskManager;
 
 public class Jackson {
     private static final String CHAT_BOT_NAME = "Jackson";
-    private static TaskManager taskManager = new TaskManager();
+    private static final String DATA_DIRECTORY = "data";
+    private static final String DATA_FILE = "jackson.txt";
+    private static final Path DATA_PATH = Paths.get(DATA_DIRECTORY, DATA_FILE);
+    private static TaskManager taskManager = new TaskManager(DATA_PATH.toString());
     
     public static void main(String[] args) {
+        // create data directory if it does not exist
+        createDataFile();       // create data file if it does not exist
+        try {
+            taskManager.loadTasksFromFile(DATA_PATH.toString());
+        } catch (Exception e) {
+            System.out.println("Error loading tasks from file: " + e.getMessage());
+        }
+
         final Scanner SCANNER = new Scanner(System.in);
         printWelcomeMessage();
 
@@ -31,6 +45,21 @@ public class Jackson {
         System.out.println("\n--------------------------------------------");
     }
 
+    private static void createDataFile() {
+        File dataDir = new File(DATA_DIRECTORY);
+        if (!dataDir.exists()) {
+            dataDir.mkdir();
+        }
+        File dataFile = new File(DATA_PATH.toString());
+        if (!dataFile.exists()) {
+            try {
+                dataFile.createNewFile();
+            } catch (java.io.IOException e) {
+                System.out.println("Error creating data file: " + e.getMessage());
+            }
+        }
+    }
+    
     private static void executeCommand(String[] userCommands) throws JacksonException {
         switch (userCommands[0]) {
         case "bye":
