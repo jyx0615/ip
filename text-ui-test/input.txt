@@ -1,29 +1,27 @@
-unknow command
+unknown command
 todo
-deadline
 event
+deadline
 deadline bad format
 event bad format
-event /from bad format
+event /from bad foramt
 event /from /t0 bad format
 todo borrow book
+deadline hw1 /by monday
+event hbd /from 9/12 /to 9/13
 list
-deadline return book /by Sunday
-list
-event project meeting /from Mon 2pm /to 4pm
-list
-deadline do homework /by no idea :-p
-list
+mark -1
+mark
 mark 1
 mark 2
-mark -1
-unmark 0
-delete
-delete 8
-list
-delete 1
 list
 unmark 2
-unmark 4
+delete 3
+list
+delete 1
+todo return book
+list
+unmark 5
+delete
 list
 bye

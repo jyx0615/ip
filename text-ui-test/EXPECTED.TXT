@@ -16,17 +16,23 @@ I'm sorry, but I don't know what that means.
 --------------------------------------------
 
 --------------------------------------------
-The description of a task cannot be empty.todo <description>
+The description of a task cannot be empty. 
+The format is as follows: 
+todo <description>
 
 --------------------------------------------
 
 --------------------------------------------
-The description of a task cannot be empty.deadline <description> /by <time>
+The description of a task cannot be empty. 
+The format is as follows: 
+event <description> /from <start time> /to <end time>
 
 --------------------------------------------
 
 --------------------------------------------
-The description of a task cannot be empty.event <description> /from <start time> /to <end time>
+The description of a task cannot be empty. 
+The format is as follows: 
+deadline <description> /by <time>
 
 --------------------------------------------
 
@@ -66,28 +72,15 @@ Now you have 1 tasks in the list.
 --------------------------------------------
 
 --------------------------------------------
-Here are the tasks in your list:
-1. [T][ ] borrow book
-
---------------------------------------------
-
---------------------------------------------
 Got it. I've added this task:
-[D][ ] return book (by: Sunday)
+[D][ ] hw1 (by: monday)
 Now you have 2 tasks in the list.
 
 --------------------------------------------
 
 --------------------------------------------
-Here are the tasks in your list:
-1. [T][ ] borrow book
-2. [D][ ] return book (by: Sunday)
-
---------------------------------------------
-
---------------------------------------------
 Got it. I've added this task:
-[E][ ] project meeting (from: Mon 2pm to: 4pm)
+[E][ ] hbd (from: 9/12 to: 9/13)
 Now you have 3 tasks in the list.
 
 --------------------------------------------
@@ -95,39 +88,8 @@ Now you have 3 tasks in the list.
 --------------------------------------------
 Here are the tasks in your list:
 1. [T][ ] borrow book
-2. [D][ ] return book (by: Sunday)
-3. [E][ ] project meeting (from: Mon 2pm to: 4pm)
-
---------------------------------------------
-
---------------------------------------------
-Got it. I've added this task:
-[D][ ] do homework (by: no idea :-p)
-Now you have 4 tasks in the list.
-
---------------------------------------------
-
---------------------------------------------
-Here are the tasks in your list:
-1. [T][ ] borrow book
-2. [D][ ] return book (by: Sunday)
-3. [E][ ] project meeting (from: Mon 2pm to: 4pm)
-4. [D][ ] do homework (by: no idea :-p)
-
---------------------------------------------
-
---------------------------------------------
-Marked task 1 as done.
-
---------------------------------------------
-
---------------------------------------------
-Marked task 2 as done.
-
---------------------------------------------
-
---------------------------------------------
-Invalid task number.
+2. [D][ ] hw1 (by: monday)
+3. [E][ ] hbd (from: 9/12 to: 9/13)
 
 --------------------------------------------
 
@@ -142,31 +104,20 @@ The task index provided is empty.
 --------------------------------------------
 
 --------------------------------------------
-Invalid task number.
+Marked task 1 as done.
+
+--------------------------------------------
+
+--------------------------------------------
+Marked task 2 as done.
 
 --------------------------------------------
 
 --------------------------------------------
 Here are the tasks in your list:
 1. [T][X] borrow book
-2. [D][X] return book (by: Sunday)
-3. [E][ ] project meeting (from: Mon 2pm to: 4pm)
-4. [D][ ] do homework (by: no idea :-p)
-
---------------------------------------------
-
---------------------------------------------
-Noted. I've removed this task:
-[T][X] borrow book
-Now you have 3 tasks in the list.
-
---------------------------------------------
-
---------------------------------------------
-Here are the tasks in your list:
-1. [D][X] return book (by: Sunday)
-2. [E][ ] project meeting (from: Mon 2pm to: 4pm)
-3. [D][ ] do homework (by: no idea :-p)
+2. [D][X] hw1 (by: monday)
+3. [E][ ] hbd (from: 9/12 to: 9/13)
 
 --------------------------------------------
 
@@ -176,15 +127,54 @@ Unmarked task 2.
 --------------------------------------------
 
 --------------------------------------------
-Invalid task number.
+Noted. I've removed this task:
+[E][ ] hbd (from: 9/12 to: 9/13)
+Now you have 2 tasks in the list.
 
 --------------------------------------------
 
 --------------------------------------------
 Here are the tasks in your list:
-1. [D][X] return book (by: Sunday)
-2. [E][ ] project meeting (from: Mon 2pm to: 4pm)
-3. [D][ ] do homework (by: no idea :-p)
+1. [T][X] borrow book
+2. [D][ ] hw1 (by: monday)
+
+--------------------------------------------
+
+--------------------------------------------
+Noted. I've removed this task:
+[T][X] borrow book
+Now you have 1 tasks in the list.
+
+--------------------------------------------
+
+--------------------------------------------
+Got it. I've added this task:
+[T][ ] return book
+Now you have 2 tasks in the list.
+
+--------------------------------------------
+
+--------------------------------------------
+Here are the tasks in your list:
+1. [D][ ] hw1 (by: monday)
+2. [T][ ] return book
+
+--------------------------------------------
+
+--------------------------------------------
+Invalid task number.
+
+--------------------------------------------
+
+--------------------------------------------
+The task index provided is empty.
+
+--------------------------------------------
+
+--------------------------------------------
+Here are the tasks in your list:
+1. [D][ ] hw1 (by: monday)
+2. [T][ ] return book
 
 --------------------------------------------
 

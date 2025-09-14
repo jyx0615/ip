@@ -16,10 +16,10 @@ public class JacksonException extends Exception {
     }
 
     private final static String UNKNOWN_COMMAND_MESSAGE = "I'm sorry, but I don't know what that means.";
-    private final static String EMPTY_TASK_MESSAGE = "The description of a task cannot be empty.";
+    private final static String EMPTY_TASK_MESSAGE = "The description of a task cannot be empty. \nThe format is as follows: \n";
     private final static String INVALID_TASK_FORMAT_MESSAGE = "The format of the task is invalid. \nThe format is as follows: \n";
     private final static String UNKNOWN_ERROR_MESSAGE = "An unknown error occurred.";
-    private final static String INVALID_TASK_INDEX_MESSAGE = "The task index provided is invalid.";
+    private final static String INVALID_TASK_INDEX_MESSAGE = "Invalid task number.";
     private final static String EMPTY_TASK_INDEX_MESSAGE = "The task index provided is empty.";
     private final static String IO_ERROR_MESSAGE = "An I/O error occurred: ";
     private final static String INVALID_TASK_FILE_FORMAT_MESSAGE = "The task in the file has an invalid format.";

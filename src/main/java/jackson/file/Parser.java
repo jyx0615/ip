@@ -12,7 +12,6 @@ public class Parser {
     }
 
     public static void parseTask(String line) throws JacksonException {
-        System.out.println("Parsing task from line: " + line);
         String[] parts = line.split(" \\| ");
         boolean isDone = parts[1].equals("1");
         switch (parts[0]) {
