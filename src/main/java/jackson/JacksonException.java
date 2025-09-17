@@ -3,20 +3,19 @@ package jackson;
 public class JacksonException extends Exception {
     public enum ErrorType {
         UNKNOWN_COMMAND,
-        EMPTY_TASK_DESCRIPTION,
         INVIALID_TASK_FORMAT,
         INVALID_TASK_INDEX,
         EMPTY_TASK_INDEX,
         MISSING_TASK_INDEX,
         INVALID_TASK_FILE_FORMAT,
+        INVALID_DATE_FORMAT,
+        INVALID_TIME_FORMAT,
         FILE_NOT_FOUND,
         FILE_WRITE_ERROR,
         FILE_CREATE_ERROR
     }
 
     private static final String UNKNOWN_COMMAND_MESSAGE = "I'm sorry, but I don't know what that means.";
-    private static final String EMPTY_TASK_MESSAGE = 
-        "The description of a task cannot be empty. \nThe format is as follows: \n";
     private static final String INVALID_TASK_FORMAT_MESSAGE = 
         "The format of the task is invalid. \nThe format is as follows: \n";
     private static final String UNKNOWN_ERROR_MESSAGE = "An unknown error occurred.";
@@ -26,6 +25,8 @@ public class JacksonException extends Exception {
     private static final String INVALID_TASK_FILE_FORMAT_MESSAGE = "The task in the file has an invalid format.";
     private static final String FILE_NOT_FOUND_MESSAGE = "The specified file was not found.";
     private static final String FILE_WRITE_ERROR_MESSAGE = "An error occurred while writing to the file.";
+    private static final String INVALID_DATE_FORMAT_MESSAGE = "The date format is invalid. Please use YYYY-MM-DD.";
+    private static final String INVALID_TIME_FORMAT_MESSAGE = "The time format is invalid. Please use HH:MM in 24-hour format.";
 
     private String message;
     private final ErrorType errorType;
@@ -44,8 +45,6 @@ public class JacksonException extends Exception {
         switch(errorType) {
         case UNKNOWN_COMMAND:
             return UNKNOWN_COMMAND_MESSAGE;
-        case EMPTY_TASK_DESCRIPTION:
-            return EMPTY_TASK_MESSAGE + message;
         case INVIALID_TASK_FORMAT:
             return INVALID_TASK_FORMAT_MESSAGE + message;
         case INVALID_TASK_INDEX:
@@ -56,6 +55,10 @@ public class JacksonException extends Exception {
             return FILE_CREATE_ERROR_MESSAGE + message;
         case INVALID_TASK_FILE_FORMAT:
             return INVALID_TASK_FILE_FORMAT_MESSAGE;
+        case INVALID_DATE_FORMAT:
+            return INVALID_DATE_FORMAT_MESSAGE;
+        case INVALID_TIME_FORMAT:
+            return INVALID_TIME_FORMAT_MESSAGE;
         case FILE_NOT_FOUND:
             return FILE_NOT_FOUND_MESSAGE + (message != null ? (": " + message) : "");
         case FILE_WRITE_ERROR:

@@ -1,21 +1,28 @@
 package jackson.task;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
+import jackson.DateTimeParser;
+
 public class Deadline extends Task {
 
-    protected String by;
+    protected LocalDate byDate;
+    protected LocalTime byTime;
 
-    public Deadline(String description, String by) {
+    public Deadline(String description, LocalDate byDate, LocalTime byTime) {
         super(description);
-        this.by = by;
+        this.byDate = byDate;
+        this.byTime = byTime;
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]" + super.toString() + " (by: " + DateTimeParser.formatDateAndTime(byDate, byTime) + ")";
     }
 
     @Override
     public String toFileString() {
-        return "D | " + super.toFileString() + " | " + by;
+        return "D | " + super.toFileString() + " | " + DateTimeParser.formatDateAndTimeToFileString(byDate, byTime);
     }
 }

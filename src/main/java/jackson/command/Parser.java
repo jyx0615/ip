@@ -1,6 +1,10 @@
 package jackson.command;
 
+import java.time.LocalTime;
+import java.time.LocalDate;
+
 import jackson.JacksonException;
+import jackson.DateTimeParser;
 
 public class Parser {
     private static final String TODO_FORMAT = "todo <description>";
@@ -46,36 +50,60 @@ public class Parser {
     
     private static Command parseTodo(String argument) throws JacksonException {
         if (argument.isEmpty()) {
-            throw new JacksonException(JacksonException.ErrorType.EMPTY_TASK_DESCRIPTION, TODO_FORMAT);
+            throw new JacksonException(JacksonException.ErrorType.INVIALID_TASK_FORMAT, TODO_FORMAT);
         }
         return new AddTodoCommand(argument);
     }
 
     private static Command parseDeadline(String argument) throws JacksonException {
         String[] parts = argument.split(" /by ", 2);
-        if (parts[0].isEmpty()) {
-            throw new JacksonException(JacksonException.ErrorType.EMPTY_TASK_DESCRIPTION, DEADLINE_FORMAT);
-        } else if (parts.length < 2 || parts[1].isEmpty()) {
+        if (!hasTwoParts(parts)) {
             throw new JacksonException(JacksonException.ErrorType.INVIALID_TASK_FORMAT, DEADLINE_FORMAT);
         }
-        return new AddDeadlineCommand(parts[0], parts[1]);
+        LocalDate byDate;
+        LocalTime byTime = null;
+        if (parts[1].contains(" ")) {
+            String[] dateTimeParts = parts[1].split(" ", 2);
+            byDate = DateTimeParser.parseDate(dateTimeParts[0]);
+            byTime = DateTimeParser.parseTime(dateTimeParts[1]);
+        } else {
+            byDate = DateTimeParser.parseDate(parts[1]);
+        }
+        return new AddDeadlineCommand(parts[0], byDate, byTime);
     }
 
     private static Command parseEvent(String argument) throws JacksonException {
         String[] parts = argument.split(" /from ", 2);
-        if (parts[0].isEmpty()) {
-            throw new JacksonException(JacksonException.ErrorType.EMPTY_TASK_DESCRIPTION, EVENT_FORMAT);
-        } else if (parts.length < 2 || parts[1].isEmpty()) {
+        if (!hasTwoParts(parts)) {
             throw new JacksonException(JacksonException.ErrorType.INVIALID_TASK_FORMAT, EVENT_FORMAT);
         }
         String desc = parts[0];
         String[] timeParts = parts[1].split(" /to ", 2);
-        if (timeParts.length < 2 || timeParts[0].isEmpty() || timeParts[1].isEmpty()) {
-            throw new JacksonException(
-                JacksonException.ErrorType.INVIALID_TASK_FORMAT, 
-                "event <desc> /from <start> /to <end>"
-            );
+        if (!hasTwoParts(timeParts)) {
+            throw new JacksonException(JacksonException.ErrorType.INVIALID_TASK_FORMAT, EVENT_FORMAT);
         }
-        return new AddEventCommand(desc, timeParts[0], timeParts[1]);
+        LocalDate fromDate, toDate;
+        LocalTime fromTime = null, toTime = null;
+        if (timeParts[0].contains(" ")) {
+            String[] dateTimeParts = timeParts[0].split(" ", 2);
+            fromDate = DateTimeParser.parseDate(dateTimeParts[0]);
+            fromTime = DateTimeParser.parseTime(dateTimeParts[1]);
+        } else {
+            fromDate = DateTimeParser.parseDate(timeParts[0]);
+        }
+
+        if (timeParts[1].contains(" ")) {
+            String[] dateTimeParts = timeParts[1].split(" ", 2);
+            toDate = DateTimeParser.parseDate(dateTimeParts[0]);
+            toTime = DateTimeParser.parseTime(dateTimeParts[1]);
+        } else {
+            toDate = DateTimeParser.parseDate(timeParts[1]);
+        }
+
+        return new AddEventCommand(desc, fromDate, fromTime, toDate, toTime);
+    }
+
+    private static boolean hasTwoParts(String[] args) {
+        return args.length >= 2 && !args[0].isEmpty() && !args[1].isEmpty();
     }
 }
