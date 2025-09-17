@@ -1,8 +1,6 @@
-package jackson.file;
+package jackson.task;
 
 import jackson.JacksonException;
-import jackson.task.TaskManager;
-import jackson.task.Task;
 
 public class Parser {
     private static TaskManager taskManager;
@@ -11,7 +9,7 @@ public class Parser {
         taskManager = tm;
     }
 
-    public static void parseTask(String line) throws JacksonException {
+    public static void parseTask(String line, TaskManager taskManager) throws JacksonException {
         String[] parts = line.split(" \\| ");
         boolean isDone = parts[1].equals("1");
         switch (parts[0]) {
@@ -33,29 +31,26 @@ public class Parser {
         if (parts.length < 3) {
             throw new JacksonException(JacksonException.ErrorType.INVALID_TASK_FILE_FORMAT);
         }
-        Task t = taskManager.addTodoTask(parts[2]);
-        if (isDone) {
-            t.markAsDone();
-        }
+        Task t = new Todo(parts[2]);
+        taskManager.addTask(t);
+        taskManager.markTask(t, isDone);
     }
 
     private static void parseDeadlineTask(String[] parts, boolean isDone) throws JacksonException {
         if (parts.length < 4) {
             throw new JacksonException(JacksonException.ErrorType.INVALID_TASK_FILE_FORMAT);
         }
-        Task t = taskManager.addDeadlineTask(parts[2], parts[3]);
-        if (isDone) {
-            t.markAsDone();
-        }
+        Task t = new Deadline(parts[2], parts[3]);
+        taskManager.addTask(t);
+        taskManager.markTask(t, isDone);
     }
 
     private static void parseEventTask(String[] parts, boolean isDone) throws JacksonException {
         if (parts.length < 4) {
             throw new JacksonException(JacksonException.ErrorType.INVALID_TASK_FILE_FORMAT);
         }
-        Task t = taskManager.addEventTask(parts[2], parts[3], parts[4]);
-        if (isDone) {
-            t.markAsDone();
-        }
+        Task t = new Event(parts[2], parts[3], parts[4]);
+        taskManager.addTask(t);
+        taskManager.markTask(t, isDone);
     }
 }

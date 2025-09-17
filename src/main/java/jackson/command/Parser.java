@@ -6,8 +6,8 @@ public class Parser {
     private final static String TODO_FORMAT = "todo <description>";
     private final static String DEADLINE_FORMAT = "deadline <description> /by <time>";
     private final static String EVENT_FORMAT = "event <description> /from <start time> /to <end time>";
-    
-    public static String[] parseCommand(String userInput) throws JacksonException {
+
+    public static Command parse(String userInput) throws JacksonException {
         String[] parts = userInput.trim().split("\\s+", 2);
         String command = parts[0];
         String argument = parts.length > 1 ? parts[1] : "";
@@ -20,47 +20,46 @@ public class Parser {
         case "event":
             return parseEvent(argument);
         case "mark":
+            return new MarkCommand(parseTaskIndex(argument), true);
         case "unmark":
+            return new MarkCommand(parseTaskIndex(argument), false);
         case "delete":
-            return parseIndex(command, argument);
+            return new DeleteCommand(parseTaskIndex(argument));
         case "list":
+            return new ListCommand();
         case "bye":
-            return new String[] {command};
+            return new ExitCommand();
         default:
-            return new String[] {"invalid"};
+            throw new JacksonException(JacksonException.ErrorType.UNKNOWN_COMMAND);
         }
     }
 
-    private static String[] parseTodo(String argument) throws JacksonException {
+    public static int parseTaskIndex(String argument) throws JacksonException {
+        try {
+            return Integer.parseInt(argument);
+        } catch (NumberFormatException e) {
+            throw new JacksonException(JacksonException.ErrorType.INVALID_TASK_INDEX);
+        }
+    }
+    
+    private static Command parseTodo(String argument) throws JacksonException {
         if (argument.isEmpty()) {
             throw new JacksonException(JacksonException.ErrorType.EMPTY_TASK_DESCRIPTION, TODO_FORMAT);
         }
-        return new String[] {"todo", argument};
+        return new AddTodoCommand(argument);
     }
 
-    private static String[] parseDeadline(String argument) throws JacksonException {
+    private static Command parseDeadline(String argument) throws JacksonException {
         String[] parts = argument.split(" /by ", 2);
         if (parts[0].isEmpty()) {
             throw new JacksonException(JacksonException.ErrorType.EMPTY_TASK_DESCRIPTION, DEADLINE_FORMAT);
         } else if (parts.length < 2 || parts[1].isEmpty()) {
             throw new JacksonException(JacksonException.ErrorType.INVIALID_TASK_FORMAT, DEADLINE_FORMAT);
         }
-        return new String[] {"deadline", parts[0], parts[1]};
+        return new AddDeadlineCommand(parts[0], parts[1]);
     }
 
-    private static String[] parseIndex(String command, String argument) throws JacksonException {
-        if (argument.isEmpty()) {
-            throw new JacksonException(JacksonException.ErrorType.EMPTY_TASK_INDEX);
-        }
-        try {
-            int index = Integer.parseInt(argument);
-            return new String[] {command, String.valueOf(index)};
-        } catch (NumberFormatException e) {
-            throw new JacksonException(JacksonException.ErrorType.INVALID_TASK_INDEX);
-        }
-    }
-
-    private static String[] parseEvent(String argument) throws JacksonException {
+    private static Command parseEvent(String argument) throws JacksonException {
         String[] parts = argument.split(" /from ", 2);
         if (parts[0].isEmpty()) {
             throw new JacksonException(JacksonException.ErrorType.EMPTY_TASK_DESCRIPTION, EVENT_FORMAT);
@@ -73,6 +72,6 @@ public class Parser {
         if (timeParts.length < 2 || timeParts[0].isEmpty() || timeParts[1].isEmpty()) {
             throw new JacksonException(JacksonException.ErrorType.INVIALID_TASK_FORMAT, "event <desc> /from <start> /to <end>");
         }
-        return new String[] {"event", desc, timeParts[0], timeParts[1]};
+        return new AddEventCommand(desc, timeParts[0], timeParts[1]);
     }
 }
