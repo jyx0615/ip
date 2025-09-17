@@ -69,12 +69,13 @@ public class TaskManager {
         }
     }
 
-    public void deleteTask(int index) {
+    public void deleteTask(int index) throws JacksonException {
         if (index > 0 && index <= tasks.size()) {
             Task removedTask = tasks.remove(index - 1);
             System.out.println("Noted. I've removed this task:");
             System.out.println(removedTask.toString());
             System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+            saveTasksToFile();
         } else {
             System.out.println("Invalid task number.");
         }
