@@ -3,9 +3,9 @@ package jackson.command;
 import jackson.JacksonException;
 
 public class Parser {
-    private final static String TODO_FORMAT = "todo <description>";
-    private final static String DEADLINE_FORMAT = "deadline <description> /by <time>";
-    private final static String EVENT_FORMAT = "event <description> /from <start time> /to <end time>";
+    private static final String TODO_FORMAT = "todo <description>";
+    private static final String DEADLINE_FORMAT = "deadline <description> /by <time>";
+    private static final String EVENT_FORMAT = "event <description> /from <start time> /to <end time>";
 
     public static Command parse(String userInput) throws JacksonException {
         String[] parts = userInput.trim().split("\\s+", 2);
@@ -63,14 +63,16 @@ public class Parser {
         String[] parts = argument.split(" /from ", 2);
         if (parts[0].isEmpty()) {
             throw new JacksonException(JacksonException.ErrorType.EMPTY_TASK_DESCRIPTION, EVENT_FORMAT);
-        } else
-        if (parts.length < 2 || parts[1].isEmpty()) {
+        } else if (parts.length < 2 || parts[1].isEmpty()) {
             throw new JacksonException(JacksonException.ErrorType.INVIALID_TASK_FORMAT, EVENT_FORMAT);
         }
         String desc = parts[0];
         String[] timeParts = parts[1].split(" /to ", 2);
         if (timeParts.length < 2 || timeParts[0].isEmpty() || timeParts[1].isEmpty()) {
-            throw new JacksonException(JacksonException.ErrorType.INVIALID_TASK_FORMAT, "event <desc> /from <start> /to <end>");
+            throw new JacksonException(
+                JacksonException.ErrorType.INVIALID_TASK_FORMAT, 
+                "event <desc> /from <start> /to <end>"
+            );
         }
         return new AddEventCommand(desc, timeParts[0], timeParts[1]);
     }
