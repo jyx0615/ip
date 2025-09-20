@@ -15,22 +15,29 @@ public class TaskManager {
     }
 
     public TaskManager(ArrayList<String> lines) throws JacksonException {
-        Parser.setTaskManager(this);
         for (String line : lines) {
             Parser.parseTask(line, this);
         }
     }
 
+    /**
+     * Find tasks that contain the given keyword.
+     * @param keyword
+     * @return ArrayList of tasks that contain the given keyword.
+     */
     public ArrayList<Task> findTasks(String keyword) {
-        ArrayList<Task> matchingTasks = new ArrayList<>();
-        for (Task task : tasks) {
-            if (task.getDescription().contains(keyword)) {
-                matchingTasks.add(task);
-            }
-        }
+        ArrayList<Task> matchingTasks = tasks.stream()
+            .filter(task -> task.getDescription().contains(keyword))
+            .collect(java.util.stream.Collectors.toCollection(ArrayList::new));
         return matchingTasks;
     }
 
+    /**
+     * Get the task at the given index.
+     * @param index
+     * @return The task at the given index, or null if the index is invalid.
+     * @throws JacksonException
+     */
     public Task get(int index) throws JacksonException {
         if (isValidIndex(index)) {
             return tasks.get(index - 1);
@@ -38,10 +45,22 @@ public class TaskManager {
         return null;
     }
 
+    /**
+     * Get all tasks.
+     * @return ArrayList of all tasks.
+     */
     public ArrayList<Task> getAllTasks() {
         return tasks;
     }
     
+    /**
+     * Get tasks filtered by type and date/time.
+     * @param type The type of task to filter by.
+     * @param isBefore If true, get tasks before the given date/time. If false, get tasks after the given date/time.
+     * @param date The date to filter by.
+     * @param time The time to filter by.
+     * @return ArrayList of tasks that match the given criteria.
+     */
     public ArrayList<Task> getFilteredTasks(
         TaskType type, boolean isBefore, LocalDate date, LocalTime time
     ) {
@@ -52,22 +71,41 @@ public class TaskManager {
         return filteredTasks;
     }
 
-    public void addTask(Task task) throws JacksonException {
+    /**
+     * Add a task to the task list.
+     * @param task
+     */
+    public void addTask(Task task) {
         tasks.add(task);
     }
 
-    public void markTask(Task t, boolean isDone) throws JacksonException {
+    /**
+     * Mark or unmark a task as done.
+     * @param task
+     * @param isDone true to mark as done, false to unmark.
+     */
+    public void markTask(Task task, boolean isDone) {
         if (isDone) {
-            t.markAsDone();
+            task.markAsDone();
         } else {
-            t.unmark();
+            task.unmark();
         } 
     }
 
-    public void deleteTask(Task task) throws JacksonException {
+    /**
+     * Delete a task from the task list.
+     * @param task
+     */
+    public void deleteTask(Task task) {
         tasks.remove(task);
     }
 
+    /**
+     * Check if the given index is valid.
+     * @param index
+     * @return true if the index is valid, false otherwise.
+     * @throws JacksonException
+     */
     public boolean isValidIndex(int index) throws JacksonException {
         if (index > 0 && index <= tasks.size()) {
             return true;
