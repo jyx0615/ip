@@ -1,6 +1,6 @@
 package jackson.io;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import jackson.task.Task;
@@ -13,14 +13,24 @@ public class Ui {
         this.scanner = new Scanner(System.in);
     }
 
+    /**
+     * Print error message to the user.
+     * @param message
+     */
     public void printErrorMessage(String message) {
         System.out.println(message);
     }
 
+    /**
+     * Print a breaking line to separate different sections of output.
+     */
     public void printBreakingLine() {
         System.out.println("\n--------------------------------------------");
     }
 
+    /**
+     * Print the welcome message when the program starts.
+     */
     public static void printWelcomeMessage() {
         System.out.println("--------------------------------------------");
         System.out.printf("Hello! I'm %s.\n", CHAT_BOT_NAME);
@@ -34,47 +44,79 @@ public class Ui {
         System.out.println("\n--------------------------------------------");
     }
 
+    /**
+     * Print message after adding a task.
+     * @param task
+     * @param tasksSize
+     */
     public void printAddTaskMessage(Task task, int tasksSize) {
         System.out.println("Got it. I've added this task:");
         System.out.println(task.toString());
         System.out.println("Now you have " + tasksSize + " tasks in the list.");
     }
 
+    /**
+     * Print message after deleting a task.
+     * @param task
+     * @param tasksSize
+     */
     public void printDeleteTaskMessage(Task task, int tasksSize) {
         System.out.println("Noted. I've removed this task:");
         System.out.println(task.toString());
         System.out.println("Now you have " + tasksSize + " tasks in the list.");
     }
 
-    public void printTasks(ArrayList<Task> tasks, boolean isAll) {
+    /**
+     * Print the list of tasks.
+     * @param tasks List of tasks to print
+     * @param isAll true if printing all tasks, false if printing search results
+     */
+    public void printTasks(List<Task> tasks, boolean isAll) {
         if (isAll) {
             System.out.println("Here are the tasks in your list:");
         } else {
             System.out.println("Here are the matching tasks in your list:");
         }
-        for (int i = 0; i < tasks.size(); i++) {
-            System.out.println((i + 1) + ". " + tasks.get(i).toString());
-        }
+        tasks.stream()
+            .forEach(t -> System.out.println((tasks.indexOf(t) + 1) + ". " + t.toString()));
     }
 
+    /**
+     * Print message after marking a task as done.
+     * @param task
+     */
     public void printMarkTaskMessage(Task task) {
         System.out.println("Nice! I've marked this task as done:");
         System.out.println("  " + task.toString());
     }
 
+    /**
+     * Print message after unmarking a task as not done.
+     * @param task
+     */
     public void printUnmarkTaskMessage(Task task) {
         System.out.println("OK, I've marked this task as not done yet:");
         System.out.println("  " + task.toString());
     }
 
+    /**
+     * Print the exit message when the program ends.
+     */
     public void showExitMessage() {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
+    /**
+     * Print message when loading tasks from file fails.
+     */
     public void showLoadingError() {
         System.out.println("Error loading tasks from file. Starting with an empty task list.");
     }
 
+    /**
+     * Read the command input by the user.
+     * @return The command input by the user
+     */
     public String readCommand() {
         return scanner.nextLine();
     }

@@ -29,11 +29,15 @@ public class Jackson {
         }
     }
 
+    /**
+     * The main entry point of the application.
+     * @param args
+     */
     public static void main(String[] args) {
         new Jackson(DATA_PATH.toString()).run();
     }
 
-    public void run() {
+    private void run() {
         Ui.printWelcomeMessage();
         boolean isExit = false;
         while (!isExit) {

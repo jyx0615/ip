@@ -53,6 +53,14 @@ public class JacksonException extends Exception {
         this.message = message;
     }
 
+    /**
+     * Returns the error message associated with the exception.
+     * If a specific message was provided during instantiation, it is included
+     * in the returned message.
+     * If no specific message was provided, a default message based on the
+     * error type is returned.
+     * @return The error message.
+     */
     @Override
     public String getMessage() {
         switch (errorType) {
