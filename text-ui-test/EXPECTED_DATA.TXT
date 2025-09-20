@@ -1,2 +1,0 @@
-D | 0 | hw1 | monday
-T | 0 | return book

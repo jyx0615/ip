@@ -1,0 +1,12 @@
+list
+mark
+mark -1
+mark 3
+mark 4
+list
+unmark 1000
+unmark 3
+delete 10
+delete 1
+list
+bye
