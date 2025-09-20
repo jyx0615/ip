@@ -18,6 +18,16 @@ public class TaskManager {
         }
     }
 
+    public ArrayList<Task> findTasks(String keyword) {
+        ArrayList<Task> matchingTasks = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.getDescription().contains(keyword)) {
+                matchingTasks.add(task);
+            }
+        }
+        return matchingTasks;
+    }
+
     public Task get(int index) throws JacksonException {
         if (isValidIndex(index)) {
             return tasks.get(index - 1);

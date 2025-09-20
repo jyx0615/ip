@@ -25,6 +25,8 @@ public class Parser {
             return new MarkCommand(parseTaskIndex(argument), false);
         case "delete":
             return new DeleteCommand(parseTaskIndex(argument));
+        case "find":
+            return new FindCommand(argument);
         case "list":
             return new ListCommand();
         case "bye":
