@@ -14,16 +14,18 @@ public class JacksonException extends Exception {
         FILE_CREATE_ERROR
     }
 
-    private final static String UNKNOWN_COMMAND_MESSAGE = "I'm sorry, but I don't know what that means.";
-    private final static String EMPTY_TASK_MESSAGE = "The description of a task cannot be empty. \nThe format is as follows: \n";
-    private final static String INVALID_TASK_FORMAT_MESSAGE = "The format of the task is invalid. \nThe format is as follows: \n";
-    private final static String UNKNOWN_ERROR_MESSAGE = "An unknown error occurred.";
-    private final static String INVALID_TASK_INDEX_MESSAGE = "Invalid task number.";
-    private final static String EMPTY_TASK_INDEX_MESSAGE = "The task index provided is empty.";
-    private final static String FILE_CREATE_ERROR_MESSAGE = "An error occurred while creating the file.";
-    private final static String INVALID_TASK_FILE_FORMAT_MESSAGE = "The task in the file has an invalid format.";
-    private final static String FILE_NOT_FOUND_MESSAGE = "The specified file was not found.";
-    private final static String FILE_WRITE_ERROR_MESSAGE = "An error occurred while writing to the file.";
+    private static final String UNKNOWN_COMMAND_MESSAGE = "I'm sorry, but I don't know what that means.";
+    private static final String EMPTY_TASK_MESSAGE = 
+        "The description of a task cannot be empty. \nThe format is as follows: \n";
+    private static final String INVALID_TASK_FORMAT_MESSAGE = 
+        "The format of the task is invalid. \nThe format is as follows: \n";
+    private static final String UNKNOWN_ERROR_MESSAGE = "An unknown error occurred.";
+    private static final String INVALID_TASK_INDEX_MESSAGE = "Invalid task number.";
+    private static final String EMPTY_TASK_INDEX_MESSAGE = "The task index provided is empty.";
+    private static final String FILE_CREATE_ERROR_MESSAGE = "An error occurred while creating the file.";
+    private static final String INVALID_TASK_FILE_FORMAT_MESSAGE = "The task in the file has an invalid format.";
+    private static final String FILE_NOT_FOUND_MESSAGE = "The specified file was not found.";
+    private static final String FILE_WRITE_ERROR_MESSAGE = "An error occurred while writing to the file.";
 
     private String message;
     private final ErrorType errorType;
