@@ -29,7 +29,8 @@ public class TaskManager {
      */
     public List<Task> findTasks(String keyword) {
         List<Task> matchingTasks = tasks.stream()
-                .filter(task -> task.getDescription().contains(keyword))
+                .filter(task -> task.getDescription().toLowerCase()
+                    .contains(keyword.toLowerCase()))
                 .collect(java.util.stream.Collectors.toList());
         return matchingTasks;
     }
