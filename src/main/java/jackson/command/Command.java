@@ -10,6 +10,11 @@ public class Command {
         // Implementation of command execution
     }
 
+    /**
+     * Indicates whether this command is an exit command.
+     * 
+     * @return true if this command is an exit command, false otherwise.
+     */
     public boolean isExit() {
         return false; // Default implementation
     }

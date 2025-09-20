@@ -17,6 +17,13 @@ public class Parser {
         "list\nlist deadline/event before/after <date> [time]";
     private static final String FIND_FORMAT = "find <keyword>";
 
+    /**
+     * Parse the user input and return the corresponding Command object.
+     * 
+     * @param userInput The user input string.
+     * @return The Command object corresponding to the user input.
+     * @throws JacksonException If the command is unknown or the format is invalid.
+     */
     public static Command parse(String userInput) throws JacksonException {
         String[] parts = userInput.trim().split("\\s+", 2);
         String command = parts[0];
@@ -47,14 +54,14 @@ public class Parser {
         }
     }
     
-    public static Command parseFind(String argument) throws JacksonException {
+    private static Command parseFind(String argument) throws JacksonException {
         if (argument.isEmpty()) {
             throw new JacksonException(JacksonException.ErrorType.INVALID_COMMAND_FORMAT, FIND_FORMAT);
         }
         return new FindCommand(argument);
     }
 
-    public static Command parseList(String argument) throws JacksonException {
+    private static Command parseList(String argument) throws JacksonException {
         if (argument.isEmpty()) {
             return new ListCommand();
         }
@@ -103,7 +110,7 @@ public class Parser {
         return new FilterCommand(type, isBefore, date, time);
     }
 
-    public static int parseTaskIndex(String argument) throws JacksonException {
+    private static int parseTaskIndex(String argument) throws JacksonException {
         try {
             return Integer.parseInt(argument);
         } catch (NumberFormatException e) {

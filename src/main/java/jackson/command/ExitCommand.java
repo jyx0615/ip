@@ -10,6 +10,10 @@ public class ExitCommand extends Command {
         ui.showExitMessage();
     }
 
+    /**
+     * Indicates that this command is an exit command.
+     * @return true, as this command is an exit command.
+     */
     @Override
     public boolean isExit() {
         return true;

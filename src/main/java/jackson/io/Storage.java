@@ -1,6 +1,7 @@
 package jackson.io;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -11,7 +12,7 @@ import jackson.JacksonException;
 import jackson.task.Task;
 
 public class Storage {
-    
+
     private String filePath;
 
     public Storage(String filePath) {
@@ -33,12 +34,18 @@ public class Storage {
         }
     }
 
-    public ArrayList<String> load() throws JacksonException {
+    /**
+     * Load tasks from the data file.
+     * 
+     * @return List of lines from the data file.
+     * @throws JacksonException
+     */
+    public List<String> load() throws JacksonException {
         // create data file if it does not exist
         createDataFile();
         File dataFile = new File(filePath);
-        ArrayList<String> lines = new ArrayList<>();
-        try (Scanner s = new Scanner(dataFile)){
+        List<String> lines = new ArrayList<>();
+        try (Scanner s = new Scanner(dataFile)) {
             while (s.hasNext()) {
                 lines.add(s.nextLine());
             }
@@ -48,22 +55,20 @@ public class Storage {
         }
     }
 
-    public void save(ArrayList<Task> tasks) throws JacksonException {
-        try {
-            FileWriter writer = new FileWriter(filePath, false);
-            for (int i = 0; i < tasks.size(); i++) {
-                try {
-                    writer.write(tasks.get(i).toFileString() + System.lineSeparator());
-                } catch (IOException e) {
-                    writer.close();
-                    throw new JacksonException(JacksonException.ErrorType.FILE_WRITE_ERROR, e.getMessage());
-                }
+    /**
+     * Save tasks to the data file.
+     * 
+     * @param tasks List of tasks to save
+     * @throws JacksonException if file writing fails
+     */
+    public void save(List<Task> tasks) throws JacksonException {
+        try (FileWriter writer = new FileWriter(filePath, false)) {
+            for (Task task : tasks) {
+                writer.write(task.toFileString() + System.lineSeparator());
             }
             writer.flush();
-            writer.close();
         } catch (IOException e) {
             throw new JacksonException(JacksonException.ErrorType.FILE_WRITE_ERROR, e.getMessage());
         }
-        
     }
 }

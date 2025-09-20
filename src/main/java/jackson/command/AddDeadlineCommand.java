@@ -21,6 +21,13 @@ public class AddDeadlineCommand extends Command {
         this.byTime = byTime;
     }
 
+    /**
+     * Execute the AddDeadlineCommand.
+     * @param ui The Ui object to interact with the user.
+     * @param storage The Storage object to handle file operations.
+     * @param taskManager The TaskManager object to manage tasks.
+     * @throws JacksonException If there is an error during execution.
+     */
     @Override
     public void execute(Ui ui, Storage storage, TaskManager taskManager) throws JacksonException {
         Task task = new Deadline(description, byDate, byTime);
