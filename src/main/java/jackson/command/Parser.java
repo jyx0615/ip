@@ -98,7 +98,10 @@ public class Parser {
             isBefore = false;
             break;
         default:
-            throw new JacksonException(JacksonException.ErrorType.UNKNOWN_COMMAND);
+            throw new JacksonException(
+                JacksonException.ErrorType.INVALID_COMMAND_FORMAT, 
+                LIST_FORMAT
+            );
         }
 
         LocalDate date = DateTimeParser.parseDate(parts[2]);;
