@@ -1,7 +1,19 @@
 # Jackson User Guide
 
+**Jackson** is a desktop application for managing your tasks, optimized for use via a Command Line Interface (CLI). If you can type fast, Jackson can get your task management done faster than traditional GUI apps.
+
+## Quick Start
+
+1. Ensure you have Java 11 or above installed in your Computer.
+2. Download the latest `jackson.jar` file from [here](https://github.com/jyx0615/ip/releases).
+3. Copy the file to the folder you want to use as the home folder for your Jackson task manager.
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar jackson.jar` command to run the application.
+5. Type the command in the terminal and press Enter to execute it. e.g. typing `list` and pressing Enter will show all your tasks.
+6. Refer to the [Features](#features) below for details of each command.
+
 ## Table of Content
 - [Jackson User Guide](#jackson-user-guide)
+  - [Quick Start](#quick-start)
   - [Table of Content](#table-of-content)
   - [Features](#features)
     - [Adding todo task: `todo`](#adding-todo-task-todo)
@@ -13,11 +25,14 @@
     - [Finding task by a keyword: `find`](#finding-task-by-a-keyword-find)
     - [Showing tasks: `list`](#showing-tasks-list)
     - [Exiting the program: `exit`, `bye`](#exiting-the-program-exit-bye)
+  - [Data Storage](#data-storage)
   - [Command Summary](#command-summary)
+  - [FAQ](#faq)
+  - [Known Issues](#known-issues)
 
 
 ## Features
-> Notes about the command format:
+> **Notes about the command format:**
 > 
 > - Words in `UPPER_CASE` are the parameters to be supplied by the user.
 > e.g. in `deadline /by DATE`, `DATE` is a parameter which can be used as `deadline /by 2025-01-01`.
@@ -32,117 +47,248 @@
 
 ### Adding todo task: `todo`
 
-Add a todo with description.
+Adds a todo task with a description.
 
-Format: `todo DESCRIPTION`
+**Format:** `todo DESCRIPTION`
 
-Example: `todo hw1`
+**Example:** 
+```
+todo read book
+todo submit assignment
+```
+
+**Expected output:**
+```
+Got it. I've added this task:
+  [T][ ] read book
+Now you have 1 task in the list.
+```
 
 ### Adding deadline task: `deadline`
 
-Add a deadline task with date and time being the deadline of the task.
+Adds a deadline task with a description and deadline date/time.
 
-Format: `deadline DESCRIPTION /by DATE [TIME]`
+**Format:** `deadline DESCRIPTION /by DATE [TIME]`
 
-Example: 
- - `deadline hw1 /by 2025-09-30`
- - `deadline hw2 /by 2025-10-02 12:00`
-  
-Description:
- - `DATE` should be in the format of `YYYY-MM-DD`.
- - `TIME` should be in the format of `HH:MM`.
+**Examples:** 
+```
+deadline submit report /by 2025-09-30
+deadline project presentation /by 2025-10-02 14:00
+```
+
+**Expected output:**
+```
+Got it. I've added this task:
+  [D][ ] submit report (by: Sep 30 2025)
+Now you have 2 tasks in the list.
+```
+
+**Details:**
+- `DATE` should be in the format of `YYYY-MM-DD`
+- `TIME` should be in the format of `HH:MM` (24-hour format)
+- If time is not specified, the task is treated as due by the end of the day
 
 
 ### Adding event task: `event`
 
-Add a event task with starting date and time and ending date and time.
+Adds an event task with a description and start/end date/time.
 
-Format: `event DESCRIPTION /from DATE [TIME] /to DATE [TIME]`
+**Format:** `event DESCRIPTION /from START_DATE [START_TIME] /to END_DATE [END_TIME]`
 
-Example: 
- - `event activity1 /from 2025-09-30 /to 2025-10-01`
- - `event activity2 /from 2025-03-02 10:00 /to 2025-10-02`
- - `event vacation /from 2025-06-02 10:00 /to 2025-10-02 12:00`
-  
-Description:
- - `DATE` should be in the format of `YYYY-MM-DD`.
- - `TIME` should be in the format of `HH:MM`.
- - The end time should be after the start time.
+**Examples:** 
+```
+event team meeting /from 2025-09-30 /to 2025-09-30
+event conference /from 2025-10-02 09:00 /to 2025-10-02 17:00
+event vacation /from 2025-12-20 /to 2025-12-30
+```
+
+**Expected output:**
+```
+Got it. I've added this task:
+  [E][ ] team meeting (from: Sep 30 2025 to: Sep 30 2025)
+Now you have 3 tasks in the list.
+```
+
+**Details:**
+- `DATE` should be in the format of `YYYY-MM-DD`
+- `TIME` should be in the format of `HH:MM` (24-hour format)
+- The end date/time should be after the start date/time
+- If time is not specified, defaults to the start/end of the day
 
 ### Removing a task: `delete`
 
-Delete a task from the list.
+Deletes a task from your task list.
 
-Format: `delete TASK_INDEX`
+**Format:** `delete TASK_INDEX`
 
-Example: 
- - `delete 1`
- - `delete 2`
-  
-Description:
- - The `TASK_INDEX` should be an integer and is in the valid range of current taks.
+**Examples:** 
+```
+delete 1
+delete 3
+```
+
+**Expected output:**
+```
+Noted. I've removed this task:
+  [T][ ] read book
+Now you have 2 tasks in the list.
+```
+
+**Details:**
+- `TASK_INDEX` must be a positive integer within the valid range of current tasks
+- Use `list` command to see the current task indices
 
 
 ### Marking a task as done: `mark`
 
-Mark a task a done.
+Marks a task as completed.
 
-Format: `mark TASK_INDEX`
+**Format:** `mark TASK_INDEX`
 
-Example:
- - `mark 1`
- - `mark 10`
+**Examples:**
+```
+mark 1
+mark 2
+```
 
-Description:
- - The `TASK_INDEX` should be an integer and is in the valid range of current taks.
- - It is Ok to mark a marked task again. The task will stay marked.
+**Expected output:**
+```
+Nice! I've marked this task as done:
+  [T][X] read book
+```
+
+**Details:**
+- `TASK_INDEX` must be a positive integer within the valid range of current tasks
+- Marking an already completed task will have no additional effect
 
 
 ### Marking a task as not done: `unmark`
 
-Mark a task a not done.
+Marks a task as not completed.
 
-Format: `unmark TASK_INDEX`
+**Format:** `unmark TASK_INDEX`
 
-Example:
- - `unmark 1`
- - `unmark 10`
+**Examples:**
+```
+unmark 1
+unmark 2
+```
 
-Description:
- - The `TASK_INDEX` should be an integer and is in the valid range of current taks.
- - It is Ok to unmark a not marked task. The task will stay not done.
+**Expected output:**
+```
+OK, I've marked this task as not done yet:
+  [T][ ] read book
+```
+
+**Details:**
+- `TASK_INDEX` must be a positive integer within the valid range of current tasks
+- Unmarking an already incomplete task will have no additional effect
 
 
 ### Finding task by a keyword: `find`
 
-Find the tasks that contain keywords in description.
+Finds tasks that contain the specified keyword in their description.
 
-Format: `find KEYWORD`
+**Format:** `find KEYWORD`
 
-Example:
- - `find hw`
- - `find vacation`
+**Examples:**
+```
+find book
+find meeting
+find project
+```
 
-Description:
- - The `KEYWORD` can contain space.
+**Expected output:**
+```
+Here are the matching tasks in your list:
+1. [T][ ] read book
+3. [D][ ] book report (by: Oct 15 2025)
+```
+
+**Details:**
+- `KEYWORD` can contain spaces
+- Only tasks with descriptions containing the exact keyword will be found
 
 ### Showing tasks: `list`
 
+Shows all tasks or tasks that meet certain criteria.
+
+**Format:** 
+- `list` - Shows all tasks
+- `list deadline/event before/after DATE [TIME]` - Shows filtered tasks
+
+**Examples:**
+```
+list
+list deadline after 2025-09-30
+list event before 2025-12-25 15:00
+```
+
+**Expected output:**
+```
+Here are the tasks in your list:
+1. [T][ ] read book
+2. [D][ ] submit report (by: Sep 30 2025)
+3. [E][X] team meeting (from: Oct 1 2025 to: Oct 1 2025)
+```
+
+**Details:**
+- `DATE` should be in the format of `YYYY-MM-DD`
+- `TIME` should be in the format of `HH:MM` (24-hour format)
+- When filtering, only deadlines or events matching the date criteria will be shown
+
 ### Exiting the program: `exit`, `bye`
 
-Exits the program.
+Exits the Jackson application.
 
-Format: `exit` or `bye`
+**Format:** `exit` or `bye`
 
+**Expected output:**
+```
+Bye. Hope to see you again soon!
+```
+
+## Data Storage
+
+Jackson automatically saves your tasks to a data file located at `./data/jackson.txt`. The data file is created automatically when you first run Jackson.
+
+- Tasks are saved automatically after each command
+- No manual save is required
+- The data file uses a simple text format for easy backup and portability
+- If the data file is corrupted, Jackson will show an error message on startup
 
 ## Command Summary
 
-| Action | Format, Example |
-| ------ | --------------- |
-| **Add** |  `todo DESCRIPTION` <br> `deadline DESCRIPTION /by DATE [TIME]` <br> `event DESCRIPTION /from DATE [TIME] /to DATE [TIME]` |
-| **Mark** | `mark TASK_INDEX` |
-| **Unmark** | `unmark TASK_INDEX` |
-| **Delete** | `delete TASK_INDEX` |
-| **Exit**   | `exit`, `bye` |
-| **Find**  | `find KEYWORD`|
-| **List**   | `list` |
+| Action | Format | Example |
+|--------|--------|---------|
+| **Add Todo** | `todo DESCRIPTION` | `todo read book` |
+| **Add Deadline** | `deadline DESCRIPTION /by DATE [TIME]` | `deadline submit report /by 2025-09-30` |
+| **Add Event** | `event DESCRIPTION /from DATE [TIME] /to DATE [TIME]` | `event meeting /from 2025-10-01 14:00 /to 2025-10-01 16:00` |
+| **Mark** | `mark TASK_INDEX` | `mark 1` |
+| **Unmark** | `unmark TASK_INDEX` | `unmark 1` |
+| **Delete** | `delete TASK_INDEX` | `delete 2` |
+| **Find** | `find KEYWORD` | `find meeting` |
+| **List All** | `list` | `list` |
+| **List Filtered** | `list TYPE before/after DATE [TIME]` | `list deadline after 2025-09-30` |
+| **Exit** | `exit` or `bye` | `bye` |
+
+## FAQ
+
+**Q: How do I transfer my data to another computer?**  
+A: Simply copy the `./data/jackson.txt` file to the same location on your new computer.
+
+**Q: Can I edit the data file directly?**  
+A: While possible, it is not recommended as incorrect formatting may cause Jackson to fail to load your tasks.
+
+**Q: What happens if I enter an invalid date format?**  
+A: Jackson will display an error message and ask you to enter the command again with the correct format.
+
+**Q: Can I have tasks with the same description?**  
+A: Yes, Jackson allows multiple tasks with identical descriptions.
+
+## Known Issues
+
+- Date parsing is strict and requires exact format (YYYY-MM-DD)
+- Time must be in 24-hour format (HH:MM)
+- Very long task descriptions may cause display formatting issues
+- The application does not support undo operations
