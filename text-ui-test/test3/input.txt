@@ -1,0 +1,10 @@
+list
+find
+find hw
+find 4
+list todo
+list deadline after 2025-09-10
+list deadline before 2025-09-30
+list event before 2025-09-30 12:00
+list event after 2025-09-27 01:00
+bye

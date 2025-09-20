@@ -15,6 +15,7 @@ public class Parser {
         "event <description> /from <start date and time> /to <end date and time>";
     private static final String LIST_FORMAT = 
         "list\nlist deadline/event before/after <date> [time]";
+    private static final String FIND_FORMAT = "find <keyword>";
 
     public static Command parse(String userInput) throws JacksonException {
         String[] parts = userInput.trim().split("\\s+", 2);
@@ -35,7 +36,7 @@ public class Parser {
         case "delete":
             return new DeleteCommand(parseTaskIndex(argument));
         case "find":
-            return new FindCommand(argument);
+            return parseFind(argument);
         case "list":
             return parseList(argument);
         case "bye":
@@ -44,6 +45,13 @@ public class Parser {
         default:
             throw new JacksonException(JacksonException.ErrorType.UNKNOWN_COMMAND);
         }
+    }
+    
+    public static Command parseFind(String argument) throws JacksonException {
+        if (argument.isEmpty()) {
+            throw new JacksonException(JacksonException.ErrorType.INVALID_COMMAND_FORMAT, FIND_FORMAT);
+        }
+        return new FindCommand(argument);
     }
 
     public static Command parseList(String argument) throws JacksonException {
@@ -157,6 +165,11 @@ public class Parser {
             toDate = DateTimeParser.parseDate(timeParts[1]);
         }
 
+        if (toDate.isBefore(fromDate) || 
+            (toDate.isEqual(fromDate) && fromTime != null 
+            && toTime != null && toTime.isBefore(fromTime))) {
+            throw new JacksonException(JacksonException.ErrorType.INVALID_EVENT_TIME);
+        }
         return new AddEventCommand(desc, fromDate, fromTime, toDate, toTime);
     }
 

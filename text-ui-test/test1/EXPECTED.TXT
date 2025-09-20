@@ -1,0 +1,110 @@
+--------------------------------------------
+Hello! I'm Jackson.
+     ____.              __                         
+    |    |____    ____ |  | __  __________   ____  
+    |    \__  \ _/ ___\|  |/ / /  ___/  _ \ /    \ 
+/\__|    |/ __ \\  \___|    <  \___ (  <_> )   |  \
+\________(____  /\___  >__|_ \/____  >____/|___|  /
+              \/     \/     \/     \/           \/ 
+What can I do for you?
+
+--------------------------------------------
+
+--------------------------------------------
+I'm sorry, but I don't know what that means.
+
+--------------------------------------------
+
+--------------------------------------------
+The format of the command is invalid. 
+The format is as follows: 
+todo <description>
+
+--------------------------------------------
+
+--------------------------------------------
+Got it. I've added this task:
+[T][ ] hw1
+Now you have 1 tasks in the list.
+
+--------------------------------------------
+
+--------------------------------------------
+Got it. I've added this task:
+[T][ ] hw2
+Now you have 2 tasks in the list.
+
+--------------------------------------------
+
+--------------------------------------------
+The format of the command is invalid. 
+The format is as follows: 
+deadline <description> /by <date and time>
+
+--------------------------------------------
+
+--------------------------------------------
+The date format is invalid. Please use YYYY-MM-DD.
+
+--------------------------------------------
+
+--------------------------------------------
+Got it. I've added this task:
+[D][ ] hw3 (by: Sep 30 2025)
+Now you have 3 tasks in the list.
+
+--------------------------------------------
+
+--------------------------------------------
+Got it. I've added this task:
+[D][ ] hw4 (by: Sep 29 2025 01:00 pm)
+Now you have 4 tasks in the list.
+
+--------------------------------------------
+
+--------------------------------------------
+The format of the command is invalid. 
+The format is as follows: 
+event <description> /from <start date and time> /to <end date and time>
+
+--------------------------------------------
+
+--------------------------------------------
+The date format is invalid. Please use YYYY-MM-DD.
+
+--------------------------------------------
+
+--------------------------------------------
+Got it. I've added this task:
+[E][ ] hw5 (from: Sep 28 2025 to: Sep 30 2025 07:00 pm)
+Now you have 5 tasks in the list.
+
+--------------------------------------------
+
+--------------------------------------------
+The event end time cannot be before the start time.
+
+--------------------------------------------
+
+--------------------------------------------
+Got it. I've added this task:
+[E][ ] hw6 (from: Sep 29 2025 06:00 pm to: Sep 30 2025 01:40 am)
+Now you have 6 tasks in the list.
+
+--------------------------------------------
+
+--------------------------------------------
+Here are the tasks in your list:
+1. [T][ ] hw1
+2. [T][ ] hw2
+3. [D][ ] hw3 (by: Sep 30 2025)
+4. [D][ ] hw4 (by: Sep 29 2025 01:00 pm)
+5. [E][ ] hw5 (from: Sep 28 2025 to: Sep 30 2025 07:00 pm)
+6. [E][ ] hw6 (from: Sep 29 2025 06:00 pm to: Sep 30 2025 01:40 am)
+
+--------------------------------------------
+
+--------------------------------------------
+Bye. Hope to see you again soon!
+
+--------------------------------------------

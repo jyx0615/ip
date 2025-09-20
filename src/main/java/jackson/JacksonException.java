@@ -12,7 +12,8 @@ public class JacksonException extends Exception {
         INVALID_TIME_FORMAT,
         FILE_NOT_FOUND,
         FILE_WRITE_ERROR,
-        FILE_CREATE_ERROR
+        FILE_CREATE_ERROR,
+        INVALID_EVENT_TIME
     }
 
     private static final String UNKNOWN_COMMAND_MESSAGE = 
@@ -37,6 +38,8 @@ public class JacksonException extends Exception {
         "The date format is invalid. Please use YYYY-MM-DD.";
     private static final String INVALID_TIME_FORMAT_MESSAGE = 
         "The time format is invalid. Please use HH:MM in 24-hour format.";
+    private static final String INVALID_EVENT_TIME_MESSAGE = 
+        "The event end time cannot be before the start time.";
 
     private String message;
     private final ErrorType errorType;
@@ -69,6 +72,8 @@ public class JacksonException extends Exception {
             return INVALID_DATE_FORMAT_MESSAGE;
         case INVALID_TIME_FORMAT:
             return INVALID_TIME_FORMAT_MESSAGE;
+        case INVALID_EVENT_TIME:
+            return INVALID_EVENT_TIME_MESSAGE;
         case FILE_NOT_FOUND:
             return FILE_NOT_FOUND_MESSAGE + (message != null ? (": " + message) : "");
         case FILE_WRITE_ERROR:

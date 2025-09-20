@@ -21,7 +21,6 @@ public class FilterCommand extends Command {
     @Override
     public void execute(jackson.io.Ui ui, jackson.io.Storage storage, 
         jackson.task.TaskManager taskManager) throws jackson.JacksonException {
-        System.out.printf("%s %b %s %s\n", type, isBefore, date, time);
         ui.printTasks(
             taskManager.getFilteredTasks(type, isBefore, date, time), 
             false

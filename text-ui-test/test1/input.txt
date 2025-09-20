@@ -1,0 +1,15 @@
+unknown command
+todo
+todo hw1
+todo hw2
+deadline
+deadline hw2 /by invalid date
+deadline hw3 /by 2025-09-30
+deadline hw4 /by 2025-09-29 13:00
+event
+event hw5 /from invlid date /to unknown date
+event hw5 /from 2025-09-28 /to 2025-09-30 19:00
+event hw6 /from 2025-09-30 18:00 /to 2025-09-29 01:40
+event hw6 /from 2025-09-29 18:00 /to 2025-09-30 01:40
+list
+bye
