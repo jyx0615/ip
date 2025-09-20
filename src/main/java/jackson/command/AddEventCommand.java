@@ -12,10 +12,13 @@ import jackson.task.Event;
 
 public class AddEventCommand extends Command {
     private String description;
-    private LocalDate fromDate, toDate;
-    private LocalTime fromTime, toTime;
+    private LocalDate fromDate;
+    private LocalDate toDate;
+    private LocalTime fromTime;
+    private LocalTime toTime;
 
-    public AddEventCommand(String description, LocalDate fromDate, LocalTime fromTime, LocalDate toDate, LocalTime toTime) {
+    public AddEventCommand(String description, LocalDate fromDate,
+        LocalTime fromTime, LocalDate toDate, LocalTime toTime) {
         this.description = description;
         this.fromDate = fromDate;
         this.fromTime = fromTime;
@@ -24,7 +27,8 @@ public class AddEventCommand extends Command {
     }
 
     @Override
-    public void execute(Ui ui, Storage storage, TaskManager taskManager) throws JacksonException {
+    public void execute(Ui ui, Storage storage, 
+        TaskManager taskManager) throws JacksonException {
         Task task = new Event(description, fromDate, fromTime, toDate, toTime);
         taskManager.addTask(task);
         ui.printAddTaskMessage(task, taskManager.getAllTasks().size());

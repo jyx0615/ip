@@ -5,11 +5,16 @@ import java.time.LocalDate;
 
 import jackson.JacksonException;
 import jackson.DateTimeParser;
+import jackson.task.Task.TaskType;
 
 public class Parser {
     private static final String TODO_FORMAT = "todo <description>";
-    private static final String DEADLINE_FORMAT = "deadline <description> /by <time>";
-    private static final String EVENT_FORMAT = "event <description> /from <start time> /to <end time>";
+    private static final String DEADLINE_FORMAT = 
+        "deadline <description> /by <date and time>";
+    private static final String EVENT_FORMAT = 
+        "event <description> /from <start date and time> /to <end date and time>";
+    private static final String LIST_FORMAT = 
+        "list\nlist deadline/event before/after <date> [time]";
 
     public static Command parse(String userInput) throws JacksonException {
         String[] parts = userInput.trim().split("\\s+", 2);
@@ -32,12 +37,62 @@ public class Parser {
         case "find":
             return new FindCommand(argument);
         case "list":
-            return new ListCommand();
+            return parseList(argument);
         case "bye":
+        case "exit":
             return new ExitCommand();
         default:
             throw new JacksonException(JacksonException.ErrorType.UNKNOWN_COMMAND);
         }
+    }
+
+    public static Command parseList(String argument) throws JacksonException {
+        if (argument.isEmpty()) {
+            return new ListCommand();
+        }
+        String[] parts = argument.split(" ", 4);
+        if (parts.length < 3) {
+            throw new JacksonException(
+                JacksonException.ErrorType.INVALID_COMMAND_FORMAT, 
+                LIST_FORMAT
+            );
+        }
+        String filterType = parts[0];
+        TaskType type;
+        switch (filterType) {
+        case "deadline":
+            type = TaskType.DEADLINE;
+            break;
+        case "event":
+            type = TaskType.EVENT;
+            break;
+        default:
+            throw new JacksonException(
+                JacksonException.ErrorType.INVALID_COMMAND_FORMAT, 
+                LIST_FORMAT
+            );
+        }
+
+        String filterKeyword = parts[1];
+        boolean isBefore = false;
+        switch(filterKeyword) {
+        case "before":
+            isBefore = true;
+            break;
+        case "after":
+            isBefore = false;
+            break;
+        default:
+            throw new JacksonException(JacksonException.ErrorType.UNKNOWN_COMMAND);
+        }
+
+        LocalDate date = DateTimeParser.parseDate(parts[2]);;
+        LocalTime time = null;
+        if (parts.length == 4) {
+            time = DateTimeParser.parseTime(parts[3]);
+        }
+
+        return new FilterCommand(type, isBefore, date, time);
     }
 
     public static int parseTaskIndex(String argument) throws JacksonException {
@@ -47,10 +102,10 @@ public class Parser {
             throw new JacksonException(JacksonException.ErrorType.INVALID_TASK_INDEX);
         }
     }
-    
+
     private static Command parseTodo(String argument) throws JacksonException {
         if (argument.isEmpty()) {
-            throw new JacksonException(JacksonException.ErrorType.INVIALID_TASK_FORMAT, TODO_FORMAT);
+            throw new JacksonException(JacksonException.ErrorType.INVALID_COMMAND_FORMAT, TODO_FORMAT);
         }
         return new AddTodoCommand(argument);
     }
@@ -58,7 +113,7 @@ public class Parser {
     private static Command parseDeadline(String argument) throws JacksonException {
         String[] parts = argument.split(" /by ", 2);
         if (!hasTwoParts(parts)) {
-            throw new JacksonException(JacksonException.ErrorType.INVIALID_TASK_FORMAT, DEADLINE_FORMAT);
+            throw new JacksonException(JacksonException.ErrorType.INVALID_COMMAND_FORMAT, DEADLINE_FORMAT);
         }
         LocalDate byDate;
         LocalTime byTime = null;
@@ -75,15 +130,17 @@ public class Parser {
     private static Command parseEvent(String argument) throws JacksonException {
         String[] parts = argument.split(" /from ", 2);
         if (!hasTwoParts(parts)) {
-            throw new JacksonException(JacksonException.ErrorType.INVIALID_TASK_FORMAT, EVENT_FORMAT);
+            throw new JacksonException(JacksonException.ErrorType.INVALID_COMMAND_FORMAT, EVENT_FORMAT);
         }
         String desc = parts[0];
         String[] timeParts = parts[1].split(" /to ", 2);
         if (!hasTwoParts(timeParts)) {
-            throw new JacksonException(JacksonException.ErrorType.INVIALID_TASK_FORMAT, EVENT_FORMAT);
+            throw new JacksonException(JacksonException.ErrorType.INVALID_COMMAND_FORMAT, EVENT_FORMAT);
         }
-        LocalDate fromDate, toDate;
-        LocalTime fromTime = null, toTime = null;
+        LocalDate fromDate;
+        LocalDate toDate;
+        LocalTime fromTime = null;
+        LocalTime toTime = null;
         if (timeParts[0].contains(" ")) {
             String[] dateTimeParts = timeParts[0].split(" ", 2);
             fromDate = DateTimeParser.parseDate(dateTimeParts[0]);

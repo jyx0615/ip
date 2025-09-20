@@ -25,4 +25,28 @@ public class Deadline extends Task {
     public String toFileString() {
         return "D | " + super.toFileString() + " | " + DateTimeParser.formatDateAndTimeToFileString(byDate, byTime);
     }
+
+    @Override
+    public TaskType getType() {
+        return TaskType.DEADLINE;
+    }
+
+    @Override
+    public boolean isInRange(boolean isBefore, LocalDate date, LocalTime time) {
+        if (isBefore) {
+            if (byDate.isBefore(date)) {
+                return true;
+            } else if (byDate.isEqual(date) && byTime != null && time != null && byTime.isBefore(time)) {
+                return true;
+            }
+        } else {
+            if (byDate.isAfter(date)) {
+                return true;
+            } else if (byDate.isEqual(date) && byTime != null && 
+                time != null && byTime.isAfter(time)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

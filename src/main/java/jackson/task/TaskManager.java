@@ -1,8 +1,11 @@
 package jackson.task;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 import jackson.JacksonException;
+import jackson.task.Task.TaskType;
 
 public class TaskManager {
     private ArrayList<Task> tasks = new ArrayList<>();
@@ -39,6 +42,16 @@ public class TaskManager {
         return tasks;
     }
     
+    public ArrayList<Task> getFilteredTasks(
+        TaskType type, boolean isBefore, LocalDate date, LocalTime time
+    ) {
+        ArrayList<Task> filteredTasks = tasks.stream()
+            .filter(t -> t.getType() == type)
+            .filter(t -> t.isInRange(isBefore, date, time))
+            .collect(java.util.stream.Collectors.toCollection(ArrayList::new));
+        return filteredTasks;
+    }
+
     public void addTask(Task task) throws JacksonException {
         tasks.add(task);
     }

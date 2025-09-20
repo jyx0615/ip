@@ -1,7 +1,16 @@
 package jackson.task;
-public class Task {
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+public abstract class Task {
     private String description;
     private boolean isDone;
+
+    public enum TaskType {
+        TODO,
+        DEADLINE,
+        EVENT
+    }
 
     public Task(String description) {
         this.description = description;
@@ -30,5 +39,13 @@ public class Task {
 
     public String toFileString() {
         return (isDone ? "1" : "0") + " | " + description;
+    }
+
+    public TaskType getType() {
+        return TaskType.TODO;
+    }
+
+    public boolean isInRange(boolean isBefore, LocalDate date, LocalTime time) {
+        return false;
     }
 }

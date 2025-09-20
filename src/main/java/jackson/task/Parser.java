@@ -62,8 +62,10 @@ public class Parser {
         if (parts.length != 5) {
             throw new JacksonException(JacksonException.ErrorType.INVALID_TASK_FILE_FORMAT);
         }
-        LocalDate fromDate, toDate;
-        LocalTime fromTime = null, toTime = null;
+        LocalDate fromDate;
+        LocalDate toDate;
+        LocalTime fromTime = null;
+        LocalTime toTime = null;
 
         if (parts[3].contains(" ")) {
             String[] dateTimeParts = parts[3].split(" ", 2);
