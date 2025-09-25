@@ -120,4 +120,21 @@ public class Ui {
     public String readCommand() {
         return scanner.nextLine();
     }
+
+    /**
+     * Print the help message listing all available commands.
+     */
+    public void showHelpMessage() {
+        System.out.println("Here are the available commands:");
+        System.out.println("1. todo <description>");
+        System.out.println("2. deadline <description> /by <date and time>");
+        System.out.println("3. event <description> /from <start date and time> /to <end date and time>");
+        System.out.println("4. list");
+        System.out.println("5. list deadline/event before/after <date> [time]");
+        System.out.println("6. mark <task number>");
+        System.out.println("7. unmark <task number>");
+        System.out.println("8. delete <task number>");
+        System.out.println("9. find <keyword>");
+        System.out.println("10. bye or exit");
+    }
 }

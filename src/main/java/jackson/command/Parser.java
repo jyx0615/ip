@@ -49,6 +49,8 @@ public class Parser {
         case "bye":
         case "exit":
             return new ExitCommand();
+        case "help":
+            return new HelpCommand();
         default:
             throw new JacksonException(JacksonException.ErrorType.UNKNOWN_COMMAND);
         }

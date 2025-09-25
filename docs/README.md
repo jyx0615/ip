@@ -16,6 +16,7 @@
   - [Quick Start](#quick-start)
   - [Table of Content](#table-of-content)
   - [Features](#features)
+    - [Showing available commands: `help`](#showing-available-commands-help)
     - [Adding todo task: `todo`](#adding-todo-task-todo)
     - [Adding deadline task: `deadline`](#adding-deadline-task-deadline)
     - [Adding event task: `event`](#adding-event-task-event)
@@ -44,6 +45,33 @@
 > e.g. if the command specifies `bye 123`, it will be interpreted as `bye`.
 > 
 > - If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+
+### Showing available commands: `help`
+
+Shows a list of all available commands and their basic usage.
+
+**Format:** `help`
+
+**Expected output:**
+```
+Here are the available commands:
+1. todo <description>
+2. deadline <description> /by <date and time>
+3. event <description> /from <start date and time> /to <end date and time>
+4. list
+5. list deadline/event before/after <date> [time]
+6. mark <task number>
+7. unmark <task number>
+8. delete <task number>
+9. find <keyword>
+10. bye or exit
+```
+
+**Details:**
+- The `help` command provides a quick reference for all available commands
+- Shows the basic syntax and examples for each command type
+- Includes formatting guidelines for dates and times
+
 
 ### Adding todo task: `todo`
 
@@ -261,6 +289,7 @@ Jackson automatically saves your tasks to a data file located at `./data/jackson
 
 | Action | Format | Example |
 |--------|--------|---------|
+| **Help** | `help` | `help` |
 | **Add Todo** | `todo DESCRIPTION` | `todo read book` |
 | **Add Deadline** | `deadline DESCRIPTION /by DATE [TIME]` | `deadline submit report /by 2025-09-30` |
 | **Add Event** | `event DESCRIPTION /from DATE [TIME] /to DATE [TIME]` | `event meeting /from 2025-10-01 14:00 /to 2025-10-01 16:00` |
