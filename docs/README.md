@@ -4,7 +4,7 @@
 
 ## Quick Start
 
-1. Ensure you have Java 11 or above installed in your Computer.
+1. Ensure you have Java 17 in your Computer.
 2. Download the latest `jackson.jar` file from [here](https://github.com/jyx0615/ip/releases).
 3. Copy the file to the folder you want to use as the home folder for your Jackson task manager.
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar jackson.jar` command to run the application.
